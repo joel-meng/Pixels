@@ -1,0 +1,2 @@
+github "unsplash/unsplash-photopicker-ios" ~> 1.0
+github "ReSwift/ReSwift"

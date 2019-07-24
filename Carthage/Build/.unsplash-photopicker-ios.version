@@ -1,0 +1,10 @@
+{
+  "commitish" : "1.0.1",
+  "iOS" : [
+    {
+      "name" : "UnsplashPhotoPicker",
+      "hash" : "96255895dbf49e7e70eac664944e028cbedea0da6f4c9b8e785c31b4385b913e",
+      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+    }
+  ]
+}

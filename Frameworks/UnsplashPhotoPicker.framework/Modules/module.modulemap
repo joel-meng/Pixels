@@ -1,0 +1,11 @@
+framework module UnsplashPhotoPicker {
+  umbrella header "UnsplashPhotoPicker.h"
+
+  export *
+  module * { export * }
+}
+
+module UnsplashPhotoPicker.Swift {
+    header "UnsplashPhotoPicker-Swift.h"
+    requires objc
+}

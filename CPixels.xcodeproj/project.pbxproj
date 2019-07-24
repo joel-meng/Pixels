@@ -13,6 +13,28 @@
 		DB7B160022E881AA0058428C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB7B15FF22E881AA0058428C /* Assets.xcassets */; };
 		DB7B160322E881AA0058428C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB7B160122E881AA0058428C /* LaunchScreen.storyboard */; };
 		DB7B160E22E881AA0058428C /* CPixelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B160D22E881AA0058428C /* CPixelsTests.swift */; };
+		DB7B164022E88F7F0058428C /* HTTPURLResponse+Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B162D22E88F7F0058428C /* HTTPURLResponse+Status.swift */; };
+		DB7B164122E88F7F0058428C /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B162E22E88F7F0058428C /* DateFormatter.swift */; };
+		DB7B164222E88F7F0058428C /* UnsplashService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B162F22E88F7F0058428C /* UnsplashService.swift */; };
+		DB7B164322E88F7F0058428C /* Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163022E88F7F0058428C /* Rest.swift */; };
+		DB7B164422E88F7F0058428C /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163222E88F7F0058428C /* HTTPMethod.swift */; };
+		DB7B164522E88F7F0058428C /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163322E88F7F0058428C /* Response.swift */; };
+		DB7B164722E88F7F0058428C /* UnsplashCollectiona.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163622E88F7F0058428C /* UnsplashCollectiona.swift */; };
+		DB7B164822E88F7F0058428C /* RestRequestMethodDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163922E88F7F0058428C /* RestRequestMethodDecorator.swift */; };
+		DB7B164922E88F7F0058428C /* RestRequestURLQueryDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163A22E88F7F0058428C /* RestRequestURLQueryDecorator.swift */; };
+		DB7B164A22E88F7F0058428C /* UnsplashRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163B22E88F7F0058428C /* UnsplashRequest.swift */; };
+		DB7B164B22E88F7F0058428C /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163D22E88F7F0058428C /* RestRequest.swift */; };
+		DB7B164C22E88F7F0058428C /* BlazingFastURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163E22E88F7F0058428C /* BlazingFastURLSession.swift */; };
+		DB7B164D22E88F7F0058428C /* URLSessionDataTaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163F22E88F7F0058428C /* URLSessionDataTaskProtocol.swift */; };
+		DB7B165622E898BA0058428C /* Profile_image.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B164E22E898BA0058428C /* Profile_image.swift */; };
+		DB7B165722E898BA0058428C /* Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B164F22E898BA0058428C /* Url.swift */; };
+		DB7B165822E898BA0058428C /* PreviewPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165022E898BA0058428C /* PreviewPhoto.swift */; };
+		DB7B165A22E898BA0058428C /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165222E898BA0058428C /* Tag.swift */; };
+		DB7B165B22E898BA0058428C /* CoverPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165322E898BA0058428C /* CoverPhoto.swift */; };
+		DB7B165C22E898BA0058428C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165422E898BA0058428C /* User.swift */; };
+		DB7B165D22E898BA0058428C /* UnsplashCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165522E898BA0058428C /* UnsplashCollection.swift */; };
+		DB7B165F22E89B020058428C /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165E22E89B020058428C /* Link.swift */; };
+		DB7B166122E89E5A0058428C /* RestRequestAuthorizationDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B166022E89E5A0058428C /* RestRequestAuthorizationDecorator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +60,28 @@
 		DB7B160F22E881AA0058428C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB7B162322E8859C0058428C /* ReSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReSwift.framework; path = Carthage/Build/iOS/ReSwift.framework; sourceTree = SOURCE_ROOT; };
 		DB7B162422E8859C0058428C /* UnsplashPhotoPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UnsplashPhotoPicker.framework; path = Carthage/Build/iOS/UnsplashPhotoPicker.framework; sourceTree = SOURCE_ROOT; };
+		DB7B162D22E88F7F0058428C /* HTTPURLResponse+Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+Status.swift"; sourceTree = "<group>"; };
+		DB7B162E22E88F7F0058428C /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		DB7B162F22E88F7F0058428C /* UnsplashService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsplashService.swift; sourceTree = "<group>"; };
+		DB7B163022E88F7F0058428C /* Rest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rest.swift; sourceTree = "<group>"; };
+		DB7B163222E88F7F0058428C /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		DB7B163322E88F7F0058428C /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		DB7B163622E88F7F0058428C /* UnsplashCollectiona.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsplashCollectiona.swift; sourceTree = "<group>"; };
+		DB7B163922E88F7F0058428C /* RestRequestMethodDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequestMethodDecorator.swift; sourceTree = "<group>"; };
+		DB7B163A22E88F7F0058428C /* RestRequestURLQueryDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequestURLQueryDecorator.swift; sourceTree = "<group>"; };
+		DB7B163B22E88F7F0058428C /* UnsplashRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsplashRequest.swift; sourceTree = "<group>"; };
+		DB7B163D22E88F7F0058428C /* RestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequest.swift; sourceTree = "<group>"; };
+		DB7B163E22E88F7F0058428C /* BlazingFastURLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlazingFastURLSession.swift; sourceTree = "<group>"; };
+		DB7B163F22E88F7F0058428C /* URLSessionDataTaskProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskProtocol.swift; sourceTree = "<group>"; };
+		DB7B164E22E898BA0058428C /* Profile_image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile_image.swift; sourceTree = "<group>"; };
+		DB7B164F22E898BA0058428C /* Url.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Url.swift; sourceTree = "<group>"; };
+		DB7B165022E898BA0058428C /* PreviewPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPhoto.swift; sourceTree = "<group>"; };
+		DB7B165222E898BA0058428C /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		DB7B165322E898BA0058428C /* CoverPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverPhoto.swift; sourceTree = "<group>"; };
+		DB7B165422E898BA0058428C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../../../../../../Downloads/codegen_5d3861037d6fa/User.swift; sourceTree = "<group>"; };
+		DB7B165522E898BA0058428C /* UnsplashCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsplashCollection.swift; sourceTree = "<group>"; };
+		DB7B165E22E89B020058428C /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
+		DB7B166022E89E5A0058428C /* RestRequestAuthorizationDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestRequestAuthorizationDecorator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +124,7 @@
 		DB7B15F722E881A90058428C /* CPixels */ = {
 			isa = PBXGroup;
 			children = (
+				DB7B162B22E88F7F0058428C /* Service */,
 				DB7B15F822E881A90058428C /* AppDelegate.swift */,
 				DB7B15FA22E881A90058428C /* ViewController.swift */,
 				DB7B15FC22E881A90058428C /* Main.storyboard */,
@@ -106,6 +151,83 @@
 				DB7B162422E8859C0058428C /* UnsplashPhotoPicker.framework */,
 			);
 			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		DB7B162B22E88F7F0058428C /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				DB7B162C22E88F7F0058428C /* Extension */,
+				DB7B162F22E88F7F0058428C /* UnsplashService.swift */,
+				DB7B163022E88F7F0058428C /* Rest.swift */,
+				DB7B163122E88F7F0058428C /* Enums */,
+				DB7B163422E88F7F0058428C /* Model */,
+				DB7B163722E88F7F0058428C /* Request */,
+				DB7B163C22E88F7F0058428C /* Protocols */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		DB7B162C22E88F7F0058428C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DB7B162D22E88F7F0058428C /* HTTPURLResponse+Status.swift */,
+				DB7B162E22E88F7F0058428C /* DateFormatter.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		DB7B163122E88F7F0058428C /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				DB7B163222E88F7F0058428C /* HTTPMethod.swift */,
+				DB7B163322E88F7F0058428C /* Response.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		DB7B163422E88F7F0058428C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DB7B165E22E89B020058428C /* Link.swift */,
+				DB7B165322E898BA0058428C /* CoverPhoto.swift */,
+				DB7B165522E898BA0058428C /* UnsplashCollection.swift */,
+				DB7B165022E898BA0058428C /* PreviewPhoto.swift */,
+				DB7B164E22E898BA0058428C /* Profile_image.swift */,
+				DB7B165222E898BA0058428C /* Tag.swift */,
+				DB7B164F22E898BA0058428C /* Url.swift */,
+				DB7B165422E898BA0058428C /* User.swift */,
+				DB7B163622E88F7F0058428C /* UnsplashCollectiona.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DB7B163722E88F7F0058428C /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				DB7B163822E88F7F0058428C /* Decorator */,
+				DB7B163B22E88F7F0058428C /* UnsplashRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		DB7B163822E88F7F0058428C /* Decorator */ = {
+			isa = PBXGroup;
+			children = (
+				DB7B163922E88F7F0058428C /* RestRequestMethodDecorator.swift */,
+				DB7B166022E89E5A0058428C /* RestRequestAuthorizationDecorator.swift */,
+				DB7B163A22E88F7F0058428C /* RestRequestURLQueryDecorator.swift */,
+			);
+			path = Decorator;
+			sourceTree = "<group>";
+		};
+		DB7B163C22E88F7F0058428C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DB7B163D22E88F7F0058428C /* RestRequest.swift */,
+				DB7B163E22E88F7F0058428C /* BlazingFastURLSession.swift */,
+				DB7B163F22E88F7F0058428C /* URLSessionDataTaskProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,8 +356,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB7B164522E88F7F0058428C /* Response.swift in Sources */,
+				DB7B164122E88F7F0058428C /* DateFormatter.swift in Sources */,
+				DB7B165B22E898BA0058428C /* CoverPhoto.swift in Sources */,
+				DB7B165A22E898BA0058428C /* Tag.swift in Sources */,
+				DB7B164D22E88F7F0058428C /* URLSessionDataTaskProtocol.swift in Sources */,
+				DB7B165D22E898BA0058428C /* UnsplashCollection.swift in Sources */,
+				DB7B164022E88F7F0058428C /* HTTPURLResponse+Status.swift in Sources */,
+				DB7B165622E898BA0058428C /* Profile_image.swift in Sources */,
+				DB7B165F22E89B020058428C /* Link.swift in Sources */,
+				DB7B164422E88F7F0058428C /* HTTPMethod.swift in Sources */,
 				DB7B15FB22E881A90058428C /* ViewController.swift in Sources */,
+				DB7B164A22E88F7F0058428C /* UnsplashRequest.swift in Sources */,
+				DB7B165722E898BA0058428C /* Url.swift in Sources */,
+				DB7B166122E89E5A0058428C /* RestRequestAuthorizationDecorator.swift in Sources */,
+				DB7B164B22E88F7F0058428C /* RestRequest.swift in Sources */,
+				DB7B164822E88F7F0058428C /* RestRequestMethodDecorator.swift in Sources */,
+				DB7B164322E88F7F0058428C /* Rest.swift in Sources */,
+				DB7B165822E898BA0058428C /* PreviewPhoto.swift in Sources */,
+				DB7B164922E88F7F0058428C /* RestRequestURLQueryDecorator.swift in Sources */,
+				DB7B164722E88F7F0058428C /* UnsplashCollectiona.swift in Sources */,
+				DB7B164C22E88F7F0058428C /* BlazingFastURLSession.swift in Sources */,
+				DB7B164222E88F7F0058428C /* UnsplashService.swift in Sources */,
 				DB7B15F922E881A90058428C /* AppDelegate.swift in Sources */,
+				DB7B165C22E898BA0058428C /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

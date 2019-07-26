@@ -12,7 +12,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 */
 
 import Foundation
-struct Profile_image : Codable {
+struct ProfileImage : Codable {
 	let small : String?
 	let medium : String?
 	let large : String?
@@ -32,3 +32,5 @@ struct Profile_image : Codable {
 	}
 
 }
+
+extension ProfileImage: Equatable {}

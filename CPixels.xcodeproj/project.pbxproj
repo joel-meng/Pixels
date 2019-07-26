@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		DB591BCA22EB37930093AE24 /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BC922EB37930093AE24 /* Reader.swift */; };
 		DB591BCC22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BCB22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift */; };
+		DB591BD022EB40980093AE24 /* PixelsAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BCF22EB40980093AE24 /* PixelsAppState.swift */; };
+		DB591BD422EB41420093AE24 /* AppStartedAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BD322EB41420093AE24 /* AppStartedAction.swift */; };
 		DB7B15F922E881A90058428C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B15F822E881A90058428C /* AppDelegate.swift */; };
 		DB7B15FB22E881A90058428C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B15FA22E881A90058428C /* ViewController.swift */; };
 		DB7B15FE22E881A90058428C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB7B15FC22E881A90058428C /* Main.storyboard */; };
@@ -28,7 +30,7 @@
 		DB7B164B22E88F7F0058428C /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163D22E88F7F0058428C /* RestRequest.swift */; };
 		DB7B164C22E88F7F0058428C /* BlazingFastURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163E22E88F7F0058428C /* BlazingFastURLSession.swift */; };
 		DB7B164D22E88F7F0058428C /* URLSessionDataTaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163F22E88F7F0058428C /* URLSessionDataTaskProtocol.swift */; };
-		DB7B165622E898BA0058428C /* Profile_image.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B164E22E898BA0058428C /* Profile_image.swift */; };
+		DB7B165622E898BA0058428C /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B164E22E898BA0058428C /* ProfileImage.swift */; };
 		DB7B165722E898BA0058428C /* Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B164F22E898BA0058428C /* Url.swift */; };
 		DB7B165822E898BA0058428C /* PreviewPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165022E898BA0058428C /* PreviewPhoto.swift */; };
 		DB7B165A22E898BA0058428C /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165222E898BA0058428C /* Tag.swift */; };
@@ -52,6 +54,8 @@
 /* Begin PBXFileReference section */
 		DB591BC922EB37930093AE24 /* Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader.swift; sourceTree = "<group>"; };
 		DB591BCB22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnsplashRequestCreator'.swift"; sourceTree = "<group>"; };
+		DB591BCF22EB40980093AE24 /* PixelsAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelsAppState.swift; sourceTree = "<group>"; };
+		DB591BD322EB41420093AE24 /* AppStartedAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartedAction.swift; sourceTree = "<group>"; };
 		DB7B15F522E881A90058428C /* CPixels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPixels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB7B15F822E881A90058428C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB7B15FA22E881A90058428C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,7 +81,7 @@
 		DB7B163D22E88F7F0058428C /* RestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequest.swift; sourceTree = "<group>"; };
 		DB7B163E22E88F7F0058428C /* BlazingFastURLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlazingFastURLSession.swift; sourceTree = "<group>"; };
 		DB7B163F22E88F7F0058428C /* URLSessionDataTaskProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskProtocol.swift; sourceTree = "<group>"; };
-		DB7B164E22E898BA0058428C /* Profile_image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile_image.swift; sourceTree = "<group>"; };
+		DB7B164E22E898BA0058428C /* ProfileImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		DB7B164F22E898BA0058428C /* Url.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Url.swift; sourceTree = "<group>"; };
 		DB7B165022E898BA0058428C /* PreviewPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPhoto.swift; sourceTree = "<group>"; };
 		DB7B165222E898BA0058428C /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -114,6 +118,38 @@
 			path = Commons;
 			sourceTree = "<group>";
 		};
+		DB591BCD22EB40730093AE24 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		DB591BCE22EB407F0093AE24 /* Redux */ = {
+			isa = PBXGroup;
+			children = (
+				DB591BD222EB412C0093AE24 /* Action */,
+				DB591BD122EB41240093AE24 /* State */,
+			);
+			path = Redux;
+			sourceTree = "<group>";
+		};
+		DB591BD122EB41240093AE24 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				DB591BCF22EB40980093AE24 /* PixelsAppState.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		DB591BD222EB412C0093AE24 /* Action */ = {
+			isa = PBXGroup;
+			children = (
+				DB591BD322EB41420093AE24 /* AppStartedAction.swift */,
+			);
+			path = Action;
+			sourceTree = "<group>";
+		};
 		DB7B15EC22E881A90058428C = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +172,8 @@
 		DB7B15F722E881A90058428C /* CPixels */ = {
 			isa = PBXGroup;
 			children = (
+				DB591BCE22EB407F0093AE24 /* Redux */,
+				DB591BCD22EB40730093AE24 /* UI */,
 				DB591BC822EB37850093AE24 /* Commons */,
 				DB7B162B22E88F7F0058428C /* Service */,
 				DB7B15F822E881A90058428C /* AppDelegate.swift */,
@@ -205,7 +243,7 @@
 				DB7B165322E898BA0058428C /* CoverPhoto.swift */,
 				DB7B165522E898BA0058428C /* UnsplashCollection.swift */,
 				DB7B165022E898BA0058428C /* PreviewPhoto.swift */,
-				DB7B164E22E898BA0058428C /* Profile_image.swift */,
+				DB7B164E22E898BA0058428C /* ProfileImage.swift */,
 				DB7B165222E898BA0058428C /* Tag.swift */,
 				DB7B164F22E898BA0058428C /* Url.swift */,
 				DB7B165422E898BA0058428C /* User.swift */,
@@ -379,7 +417,8 @@
 				DB7B165D22E898BA0058428C /* UnsplashCollection.swift in Sources */,
 				DB7B164022E88F7F0058428C /* HTTPURLResponse+Status.swift in Sources */,
 				DB591BCA22EB37930093AE24 /* Reader.swift in Sources */,
-				DB7B165622E898BA0058428C /* Profile_image.swift in Sources */,
+				DB7B165622E898BA0058428C /* ProfileImage.swift in Sources */,
+				DB591BD022EB40980093AE24 /* PixelsAppState.swift in Sources */,
 				DB7B165F22E89B020058428C /* Link.swift in Sources */,
 				DB7B164422E88F7F0058428C /* HTTPMethod.swift in Sources */,
 				DB7B15FB22E881A90058428C /* ViewController.swift in Sources */,
@@ -387,6 +426,7 @@
 				DB7B165722E898BA0058428C /* Url.swift in Sources */,
 				DB7B166122E89E5A0058428C /* RestRequestAuthorizationDecorator.swift in Sources */,
 				DB7B164B22E88F7F0058428C /* RestRequest.swift in Sources */,
+				DB591BD422EB41420093AE24 /* AppStartedAction.swift in Sources */,
 				DB7B164822E88F7F0058428C /* RestRequestMethodDecorator.swift in Sources */,
 				DB7B164322E88F7F0058428C /* Rest.swift in Sources */,
 				DB7B165822E898BA0058428C /* PreviewPhoto.swift in Sources */,

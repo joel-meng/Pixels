@@ -12,6 +12,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 */
 
 import Foundation
+
 struct PreviewPhoto : Codable {
 	let id : String?
 	let urls : Url?
@@ -29,3 +30,5 @@ struct PreviewPhoto : Codable {
 	}
 
 }
+
+extension PreviewPhoto: Equatable {}

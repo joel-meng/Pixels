@@ -44,3 +44,5 @@ struct Link : Codable {
 	}
 
 }
+
+extension Link: Equatable {}

@@ -25,8 +25,8 @@ public extension XCTestCase {
      - parameter testCase:        The test case to be executed that expected to fire the assertion
      method.
      */
-    func expectFatalError(expectedMessage: String? = nil, file: StaticString = #file,
-                          line: UInt = #line, testCase: @escaping () -> Void) {
+    public func expectFatalError(expectedMessage: String? = nil, file: StaticString = #file,
+                                 line: UInt = #line, testCase: @escaping () -> Void) {
         expectAssertionNoReturnFunction(
             functionName: "fatalError",
             file: file,
@@ -36,7 +36,7 @@ public extension XCTestCase {
         },
             expectedMessage: expectedMessage,
             testCase: testCase,
-            cleanUp: {
+            cleanUp:  {
                 Assertions.fatalErrorClosure = Assertions.swiftFatalErrorClosure
         })
     }
@@ -54,7 +54,7 @@ public extension XCTestCase {
         cleanUp: @escaping () -> Void) {
 
         let asyncExpectation = futureExpectation(withDescription: funcName + "-Expectation")
-        var assertionMessage: String?
+        var assertionMessage: String? = nil
 
         function { (message) -> Void in
             assertionMessage = message

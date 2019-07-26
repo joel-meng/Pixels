@@ -74,8 +74,6 @@
 		DB7B160922E881AA0058428C /* CPixelsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CPixelsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB7B160D22E881AA0058428C /* CPixelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPixelsTests.swift; sourceTree = "<group>"; };
 		DB7B160F22E881AA0058428C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DB7B162322E8859C0058428C /* ReSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReSwift.framework; path = Carthage/Build/iOS/ReSwift.framework; sourceTree = SOURCE_ROOT; };
-		DB7B162422E8859C0058428C /* UnsplashPhotoPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UnsplashPhotoPicker.framework; path = Carthage/Build/iOS/UnsplashPhotoPicker.framework; sourceTree = SOURCE_ROOT; };
 		DB7B162D22E88F7F0058428C /* HTTPURLResponse+Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+Status.swift"; sourceTree = "<group>"; };
 		DB7B162E22E88F7F0058428C /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		DB7B162F22E88F7F0058428C /* UnsplashService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsplashService.swift; sourceTree = "<group>"; };
@@ -182,7 +180,6 @@
 		DB7B15EC22E881A90058428C = {
 			isa = PBXGroup;
 			children = (
-				DB7B161F22E882A80058428C /* Frameworks */,
 				DB7B15F722E881A90058428C /* CPixels */,
 				DB7B160C22E881AA0058428C /* CPixelsTests */,
 				DB7B15F622E881A90058428C /* Products */,
@@ -221,15 +218,6 @@
 				DB7B160F22E881AA0058428C /* Info.plist */,
 			);
 			path = CPixelsTests;
-			sourceTree = "<group>";
-		};
-		DB7B161F22E882A80058428C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				DB7B162322E8859C0058428C /* ReSwift.framework */,
-				DB7B162422E8859C0058428C /* UnsplashPhotoPicker.framework */,
-			);
-			path = Frameworks;
 			sourceTree = "<group>";
 		};
 		DB7B162B22E88F7F0058428C /* Service */ = {
@@ -417,13 +405,13 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/ReSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/UnsplashPhotoPicker.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReSwiftThunk.framework",
 			);
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/UnsplashPhotoPicker.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReSwiftThunk.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

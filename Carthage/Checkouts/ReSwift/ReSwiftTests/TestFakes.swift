@@ -65,7 +65,7 @@ struct TestCustomAppState: StateType {
 
 struct NoOpAction: Action {}
 
-struct SetValueAction: Action {
+struct SetValueAction {
 
     let value: Int?
     static let type = "SetValueAction"
@@ -75,7 +75,19 @@ struct SetValueAction: Action {
     }
 }
 
-struct SetValueStringAction: Action {
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
+extension SetValueAction: StandardActionConvertible {
+    init(_ standardAction: StandardAction) {
+        self.value = standardAction.payload!["value"] as! Int?
+    }
+
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: SetValueAction.type, payload: ["value": value as AnyObject],
+                              isTypedAction: true)
+    }
+}
+
+struct SetValueStringAction {
 
     var value: String
     static let type = "SetValueStringAction"
@@ -83,15 +95,45 @@ struct SetValueStringAction: Action {
     init (_ value: String) {
         self.value = value
     }
+
 }
 
-struct SetCustomSubstateAction: Action {
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
+extension SetValueStringAction: StandardActionConvertible {
+    init(_ standardAction: StandardAction) {
+        self.value = standardAction.payload!["value"] as! String
+    }
+
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: SetValueStringAction.type,
+                              payload: ["value": value as AnyObject],
+                              isTypedAction: true)
+    }
+
+}
+
+struct SetCustomSubstateAction {
 
     var value: Int
     static let type = "SetCustomSubstateAction"
 
     init (_ value: Int) {
         self.value = value
+    }
+
+}
+
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
+extension SetCustomSubstateAction: StandardActionConvertible {
+
+    init(_ standardAction: StandardAction) {
+        self.value = standardAction.payload!["value"] as! Int
+    }
+
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: SetValueStringAction.type,
+                              payload: ["value": value as AnyObject],
+                              isTypedAction: true)
     }
 }
 

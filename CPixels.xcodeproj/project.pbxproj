@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB591BCA22EB37930093AE24 /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BC922EB37930093AE24 /* Reader.swift */; };
+		DB591BCC22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BCB22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift */; };
 		DB7B15F922E881A90058428C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B15F822E881A90058428C /* AppDelegate.swift */; };
 		DB7B15FB22E881A90058428C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B15FA22E881A90058428C /* ViewController.swift */; };
 		DB7B15FE22E881A90058428C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB7B15FC22E881A90058428C /* Main.storyboard */; };
@@ -48,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB591BC922EB37930093AE24 /* Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader.swift; sourceTree = "<group>"; };
+		DB591BCB22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnsplashRequestCreator'.swift"; sourceTree = "<group>"; };
 		DB7B15F522E881A90058428C /* CPixels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPixels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB7B15F822E881A90058428C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB7B15FA22E881A90058428C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +106,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB591BC822EB37850093AE24 /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				DB591BC922EB37930093AE24 /* Reader.swift */,
+			);
+			path = Commons;
+			sourceTree = "<group>";
+		};
 		DB7B15EC22E881A90058428C = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +136,7 @@
 		DB7B15F722E881A90058428C /* CPixels */ = {
 			isa = PBXGroup;
 			children = (
+				DB591BC822EB37850093AE24 /* Commons */,
 				DB7B162B22E88F7F0058428C /* Service */,
 				DB7B15F822E881A90058428C /* AppDelegate.swift */,
 				DB7B15FA22E881A90058428C /* ViewController.swift */,
@@ -206,6 +219,7 @@
 			children = (
 				DB7B163822E88F7F0058428C /* Decorator */,
 				DB7B163B22E88F7F0058428C /* UnsplashRequest.swift */,
+				DB591BCB22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -356,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB591BCC22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift in Sources */,
 				DB7B164522E88F7F0058428C /* Response.swift in Sources */,
 				DB7B164122E88F7F0058428C /* DateFormatter.swift in Sources */,
 				DB7B165B22E898BA0058428C /* CoverPhoto.swift in Sources */,
@@ -363,6 +378,7 @@
 				DB7B164D22E88F7F0058428C /* URLSessionDataTaskProtocol.swift in Sources */,
 				DB7B165D22E898BA0058428C /* UnsplashCollection.swift in Sources */,
 				DB7B164022E88F7F0058428C /* HTTPURLResponse+Status.swift in Sources */,
+				DB591BCA22EB37930093AE24 /* Reader.swift in Sources */,
 				DB7B165622E898BA0058428C /* Profile_image.swift in Sources */,
 				DB7B165F22E89B020058428C /* Link.swift in Sources */,
 				DB7B164422E88F7F0058428C /* HTTPMethod.swift in Sources */,

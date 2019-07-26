@@ -11,11 +11,10 @@ import ReSwift
 
 struct PixelsAppState: StateType, Equatable {
 
-	var dataState: PixelsDataState
-	
+	var dataState: PixelsDataState = PixelsDataState()
 }
 
 struct PixelsDataState: StateType, Equatable {
 
-	var unsplashFeaturedCollections: [UnsplashCollection]
+	var unsplashFeaturedCollections: [UnsplashCollection] = []
 }

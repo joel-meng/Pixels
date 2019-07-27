@@ -10,7 +10,7 @@ import Foundation
 
 struct UnsplashService {
 
-	func listCollections(completion: @escaping (_ response: Response<[UnsplashCollection]>) -> Void) -> URLSessionDataTaskProtocol? {
+	static func listCollections(completion: @escaping (_ response: Response<[UnsplashCollection]>) -> Void) -> URLSessionDataTaskProtocol? {
 		let listCollectionsRequest = unsplashGETRequest(path: "/collections/featured")
 		let dateDecodingFormatter = JSONDecoder.DateDecodingStrategy.formatted(DateFormatter.rfc3339DateFormatter)
 

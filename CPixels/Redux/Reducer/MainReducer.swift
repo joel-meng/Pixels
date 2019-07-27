@@ -10,7 +10,9 @@ import Foundation
 import ReSwift
 
 func reducer(action: Action, state: PixelsAppState?) -> PixelsAppState {
+	
 	return PixelsAppState(
-		dataState: dataReducer(action: action, state: state?.dataState)
+		dataState: dataReducer(action: action, state: state?.dataState),
+		loadingState: dataLoadingStateReducer(action: action, state: state?.loadingState)
 	)
 }

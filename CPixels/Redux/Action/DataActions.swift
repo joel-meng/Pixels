@@ -9,8 +9,29 @@
 import Foundation
 import ReSwift
 
-protocol DataAction: Action {}
+protocol DataAction: Action {
 
-enum FetchDataAction: DataAction {
-	case featuredCollection([UnsplashCollection])
+	var dataSet: PixelsData { get }
+
+	var loadingState: AsyncLoadingState { get }
+}
+
+enum AsyncLoadingState {
+
+	case notStarted
+	case started
+	case success(Any)
+	case error(Error)
+}
+
+enum PixelsData {
+
+	case featuredCollection
+}
+
+struct DataRequestAction: DataAction {
+
+	let dataSet: PixelsData
+	
+	let loadingState: AsyncLoadingState
 }

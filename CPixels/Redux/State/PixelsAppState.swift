@@ -12,9 +12,25 @@ import ReSwift
 struct PixelsAppState: StateType, Equatable {
 
 	var dataState: PixelsDataState = PixelsDataState()
+
+	var loadingState: LoadingTaskState = LoadingTaskState()
 }
 
 struct PixelsDataState: StateType, Equatable {
 
 	var unsplashFeaturedCollections: [UnsplashCollection] = []
+}
+
+struct LoadingTaskState: StateType, Equatable {
+
+	var tasks: [PixelsData: DataReadyState] = [:]
+}
+
+enum DataReadyState {
+	
+	case initilized
+	case loading
+	case ready
+	case outdated
+	case error
 }

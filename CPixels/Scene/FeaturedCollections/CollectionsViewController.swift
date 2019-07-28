@@ -15,6 +15,7 @@ class CollectionsViewController: UIViewController {
 	@IBOutlet var tableView: UITableView! {
 		didSet {
 			self.tableView.dataSource = self
+			self.tableView.delegate = self
 		}
 	}
 
@@ -23,7 +24,7 @@ class CollectionsViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		title = "Featured"
-		
+
 		store.subscribe(self) { subscription in
 			subscription.skip(when: ==)
 		}

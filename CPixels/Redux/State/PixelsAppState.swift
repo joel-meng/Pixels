@@ -8,6 +8,7 @@
 
 import Foundation
 import ReSwift
+import UIKit
 
 struct PixelsAppState: StateType, Equatable {
 
@@ -30,7 +31,7 @@ struct LoadingTaskState: StateType, Equatable {
 
 struct PhotoLoadingState: StateType, Equatable {
 
-	var loaded: [String: Data] = [:]
+	var loaded: [String: UIImage] = [:]
 }
 
 enum DataReadyState {

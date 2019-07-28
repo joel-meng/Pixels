@@ -35,3 +35,14 @@ struct DataRequestAction: DataAction {
 	
 	let loadingState: AsyncLoadingState
 }
+
+// MARK: - Image Download Action
+
+protocol DownloadAction: Action {}
+
+struct ImageFetchAction: DownloadAction {
+
+	let imageURL: String
+
+	let loadingState: AsyncLoadingState
+}

@@ -184,16 +184,8 @@
 			children = (
 				DB7B15FA22E881A90058428C /* CollectionsViewController.swift */,
 				DB591BE022ECADD20093AE24 /* FeatureCollectionTableViewCell.swift */,
-				DB591BE222ED4FF50093AE24 /* New Group */,
 			);
 			path = FeaturedCollections;
-			sourceTree = "<group>";
-		};
-		DB591BE222ED4FF50093AE24 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		DB7B15EC22E881A90058428C = {

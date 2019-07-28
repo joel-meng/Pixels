@@ -8,6 +8,7 @@
 
 import Foundation
 import ReSwift
+import UIKit
 
 func dataReducer(action: Action, state: PixelsDataState?) -> PixelsDataState {
 
@@ -47,7 +48,18 @@ func dataLoadingStateReducer(action: Action, state: LoadingTaskState?) -> Loadin
 
 func photoLoadingStateReducer(action: Action, state: PhotoLoadingState?) -> PhotoLoadingState {
 
-	let state = state ?? PhotoLoadingState()
+	var state = state ?? PhotoLoadingState()
+
+	guard let imageFetchingAction = action as? ImageFetchAction else {
+		return state
+	}
+
+	switch imageFetchingAction.loadingState {
+	case .success(let image):
+		state.loaded[imageFetchingAction.imageURL] = image as? UIImage
+	case .error, .started, .notStarted:
+		break
+	}
 
 	return state
 }

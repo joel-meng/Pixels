@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import ReSwift
+import ReSwiftThunk
 
 final class FeatureCollectionTableViewCell: UITableViewCell {
 
@@ -18,41 +19,72 @@ final class FeatureCollectionTableViewCell: UITableViewCell {
 
 	private var imageLoadingTask: URLSessionDataTaskProtocol?
 
-	func configure(with model: UnsplashCollection) {
-		collectionTitleLabel.text = model.title
+	private var coverPhotoURL: String?
 
-		if let coverPhoto = model.coverPhoto?.urls?.regular {
+	func configure(with model: UnsplashCollection) {
+		DispatchQueue.main.async { [weak self] in
+			self?.collectionTitleLabel.text = model.title
+		}
+
+		if let coverPhotoURL = model.coverPhoto?.urls?.regular {
+
+			self.coverPhotoURL = coverPhotoURL
 
 			store.subscribe(self) { subscription in
 				subscription.select({ (state) -> PhotoLoadingState in
 					state.photoState
-				}).skipRepeats()
+				})
 			}
 
 			// dispatch load photo
-			imageLoadingTask = UnsplashService.loadImage(withURL: coverPhoto, completion: { [weak self] (result) in
-				guard let loadedImage = try? result.get() else { return }
-				DispatchQueue.main.async {
-					self?.coverPhotoImageView.image = loadedImage
-				}
-			})
+			store.dispatch(fetchImage(withURL: coverPhotoURL))
 		}
 	}
 
 	override func prepareForReuse() {
-		super.prepareForReuse()
 		store.unsubscribe(self)
-	}
 
+		imageLoadingTask?.cancel()
+		imageLoadingTask = nil
+
+		collectionTitleLabel.text = nil
+		coverPhotoImageView.image = nil
+
+		super.prepareForReuse()
+	}
 }
 
 extension FeatureCollectionTableViewCell: StoreSubscriber {
 
 	func newState(state: PhotoLoadingState) {
-
+		if let coverPhotoURL = self.coverPhotoURL, let image = state.loaded[coverPhotoURL] {
+			updateImage(image)
+		}
 	}
 
 	private func updateImage(_ image: UIImage) {
+		DispatchQueue.main.async {
+			self.coverPhotoImageView.image = image
+		}
+	}
+}
 
+private func fetchImage(withURL imageUrl: String) -> Thunk<PixelsAppState> {
+
+	return Thunk<PixelsAppState> { (dispatch, getState) in
+
+		guard let state = getState() else { return }
+
+		if let alreadyLoadedImage = state.photoState.loaded[imageUrl] {
+			dispatch(ImageFetchAction(imageURL: imageUrl, loadingState: .success(alreadyLoadedImage)))
+			return
+		}
+
+		dispatch(ImageFetchAction(imageURL: imageUrl, loadingState: .started))
+
+		UnsplashService.loadImage(withURL: imageUrl, completion: { (result) in
+			guard let loadedImage = try? result.get() else { return }
+			dispatch(ImageFetchAction(imageURL: imageUrl, loadingState: .success(loadedImage)))
+		})?.resume()
 	}
 }

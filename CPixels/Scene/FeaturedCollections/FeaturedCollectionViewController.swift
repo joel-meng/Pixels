@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
+//  FeaturedCollectionViewController.swift
 //  CPixels
 //
-//  Created by Joel Meng on 7/24/19.
+//  Created by Joel Meng on 7/28/19.
 //  Copyright © 2019 Joel Meng. All rights reserved.
 //
 
@@ -10,12 +10,15 @@ import UIKit
 import ReSwift
 import ReSwiftThunk
 
-class CollectionsViewController: UIViewController {
+class FeaturedCollectionViewController: UIViewController {
 
 	@IBOutlet var tableView: UITableView! {
 		didSet {
 			self.tableView.dataSource = self
 			self.tableView.delegate = self
+
+			let nib = UINib(nibName: "FeaturedCollectionTableViewCell", bundle: nil)
+			self.tableView.register(nib, forCellReuseIdentifier: "FeaturedCollectionTableViewCell")
 		}
 	}
 
@@ -41,7 +44,7 @@ class CollectionsViewController: UIViewController {
 	}
 }
 
-extension CollectionsViewController: StoreSubscriber {
+extension FeaturedCollectionViewController: StoreSubscriber {
 
 	func newState(state: PixelsAppState) {
 		if case .loading? = state.loadingState.tasks[.featuredCollection] {
@@ -54,14 +57,14 @@ extension CollectionsViewController: StoreSubscriber {
 	}
 }
 
-extension CollectionsViewController: UITableViewDataSource, UITableViewDelegate {
+extension FeaturedCollectionViewController: UITableViewDataSource, UITableViewDelegate {
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return featuredCollections.count
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "FeaturedCollection",
+		let cell = tableView.dequeueReusableCell(withIdentifier: "FeaturedCollectionTableViewCell",
 												 for: indexPath) as! FeatureCollectionTableViewCell
 		cell.configure(with: featuredCollections[indexPath.row])
 		return cell
@@ -91,5 +94,5 @@ fileprivate let fetchFeaturedCollectionThunk = Thunk<PixelsAppState> { (dispatch
 										   loadingState: .error(error)))
 			}
 		}
-	}?.resume()
+		}?.resume()
 }

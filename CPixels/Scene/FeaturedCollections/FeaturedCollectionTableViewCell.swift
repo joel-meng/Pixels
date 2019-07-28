@@ -1,5 +1,5 @@
 //
-//  FeatureCollectionTableViewCell.swift
+//  FeaturedCollectionTableViewCell.swift
 //  CPixels
 //
 //  Created by Joel Meng on 7/28/19.
@@ -13,18 +13,22 @@ import ReSwiftThunk
 
 final class FeatureCollectionTableViewCell: UITableViewCell {
 
-	@IBOutlet var coverPhotoImageView: UIImageView!
+	@IBOutlet var titleOnlyView: UIView!
+	@IBOutlet var titleOnlyLabel: UILabel!
 
-	@IBOutlet var collectionTitleLabel: UILabel!
+
+	@IBOutlet var imagedTitleView: UIView!
+	@IBOutlet var imageAndTitleLabel: UILabel!
+	@IBOutlet var imageTitleImageView: UIImageView!
 
 	private var imageLoadingTask: URLSessionDataTaskProtocol?
 
 	private var coverPhotoURL: String?
 
 	func configure(with model: UnsplashCollection) {
-		DispatchQueue.main.async { [weak self] in
-			self?.collectionTitleLabel.text = model.title
-		}
+
+		configTitleOnlyMode(withTitle: model.title)
+
 
 		if let coverPhotoURL = model.coverPhoto?.urls?.regular {
 
@@ -44,13 +48,27 @@ final class FeatureCollectionTableViewCell: UITableViewCell {
 	override func prepareForReuse() {
 		store.unsubscribe(self)
 
+		configTitleOnlyMode(withTitle: nil)
+
 		imageLoadingTask?.cancel()
 		imageLoadingTask = nil
 
-		collectionTitleLabel.text = nil
-		coverPhotoImageView.image = nil
-
 		super.prepareForReuse()
+	}
+
+	private func configTitleOnlyMode(withTitle title: String?) {
+		titleOnlyLabel.text = title
+		imageAndTitleLabel.text = title
+
+		imagedTitleView.isHidden = true
+		titleOnlyView.isHidden = false
+	}
+
+	private func configTitleAndImageMode(withImage image: UIImage) {
+		imageTitleImageView.image = image
+
+		imagedTitleView.isHidden = false
+		titleOnlyView.isHidden = true
 	}
 }
 
@@ -63,8 +81,8 @@ extension FeatureCollectionTableViewCell: StoreSubscriber {
 	}
 
 	private func updateImage(_ image: UIImage) {
-		DispatchQueue.main.async {
-			self.coverPhotoImageView.image = image
+		DispatchQueue.main.async { [weak self] in
+			self?.configTitleAndImageMode(withImage: image)
 		}
 	}
 }

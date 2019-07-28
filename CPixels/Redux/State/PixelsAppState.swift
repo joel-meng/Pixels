@@ -14,6 +14,8 @@ struct PixelsAppState: StateType, Equatable {
 	var dataState: PixelsDataState = PixelsDataState()
 
 	var loadingState: LoadingTaskState = LoadingTaskState()
+
+	var photoState: PhotoLoadingState = PhotoLoadingState()
 }
 
 struct PixelsDataState: StateType, Equatable {
@@ -24,6 +26,11 @@ struct PixelsDataState: StateType, Equatable {
 struct LoadingTaskState: StateType, Equatable {
 
 	var tasks: [PixelsData: DataReadyState] = [:]
+}
+
+struct PhotoLoadingState: StateType, Equatable {
+
+	var loaded: [String: Data] = [:]
 }
 
 enum DataReadyState {

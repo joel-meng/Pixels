@@ -44,3 +44,10 @@ func dataLoadingStateReducer(action: Action, state: LoadingTaskState?) -> Loadin
 
 	return state
 }
+
+func photoLoadingStateReducer(action: Action, state: PhotoLoadingState?) -> PhotoLoadingState {
+
+	let state = state ?? PhotoLoadingState()
+
+	return state
+}

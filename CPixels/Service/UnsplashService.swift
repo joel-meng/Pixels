@@ -7,8 +7,16 @@
 //
 
 import Foundation
+import UIKit
 
 struct UnsplashService {
+
+	static func loadImage(withURL url: String, completion: @escaping (_ response: Result<UIImage, Error>) -> Void) -> URLSessionDataTaskProtocol? {
+		let loadImageRequest = unsplashGETRequest(path: url)
+		return Rest.loadImage(request: loadImageRequest) { (result) in
+			completion(result)
+		}
+	}
 
 	static func listCollections(completion: @escaping (_ response: Response<[UnsplashCollection]>) -> Void) -> URLSessionDataTaskProtocol? {
 		let listCollectionsRequest = unsplashGETRequest(path: "/collections/featured")

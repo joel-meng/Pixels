@@ -68,3 +68,5 @@ struct UnsplashCollection : Codable {
 	}
 
 }
+
+extension UnsplashCollection: Equatable {}

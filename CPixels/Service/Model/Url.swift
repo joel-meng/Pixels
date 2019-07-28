@@ -38,3 +38,5 @@ struct Url : Codable {
 	}
 
 }
+
+extension Url: Equatable {}

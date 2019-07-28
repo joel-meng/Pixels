@@ -1,2 +1,2 @@
-github "ReSwift/ReSwift" "5.0.0"
-github "unsplash/unsplash-photopicker-ios" "1.0.1"
+github "ReSwift/ReSwift" "4.1.1"
+github "ReSwift/ReSwift-Thunk" "1.1.0"

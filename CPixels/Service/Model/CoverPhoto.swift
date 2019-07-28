@@ -77,3 +77,5 @@ struct CoverPhoto : Codable {
 	}
 
 }
+
+extension CoverPhoto: Equatable {}

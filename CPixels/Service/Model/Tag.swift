@@ -26,3 +26,4 @@ struct Tag : Codable {
 	}
 
 }
+extension Tag: Equatable {}

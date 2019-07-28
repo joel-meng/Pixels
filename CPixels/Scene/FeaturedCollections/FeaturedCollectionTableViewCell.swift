@@ -25,6 +25,11 @@ final class FeatureCollectionTableViewCell: UITableViewCell {
 
 	private var coverPhotoURL: String?
 
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		selectionStyle = .none
+	}
+
 	func configure(with model: UnsplashCollection) {
 
 		configTitleOnlyMode(withTitle: model.title)

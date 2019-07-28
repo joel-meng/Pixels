@@ -16,9 +16,10 @@ class FeaturedCollectionViewController: UIViewController {
 		didSet {
 			self.tableView.dataSource = self
 			self.tableView.delegate = self
+			tableView.contentInsetAdjustmentBehavior = .never
 
 			let nib = UINib(nibName: "FeaturedCollectionTableViewCell", bundle: nil)
-			self.tableView.register(nib, forCellReuseIdentifier: "FeaturedCollectionTableViewCell")
+			tableView.register(nib, forCellReuseIdentifier: "FeaturedCollectionTableViewCell")
 		}
 	}
 
@@ -71,7 +72,7 @@ extension FeaturedCollectionViewController: UITableViewDataSource, UITableViewDe
 	}
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 120
+		return 160
 	}
 }
 
@@ -82,17 +83,15 @@ fileprivate let fetchFeaturedCollectionThunk = Thunk<PixelsAppState> { (dispatch
 	dispatch(DataRequestAction(dataSet: .featuredCollection, loadingState: .started))
 
 	UnsplashService.listCollections { (response) in
-		switch response {
-		case .success(let result):
-			DispatchQueue.main.async {
+		DispatchQueue.main.async {
+			switch response {
+			case .success(let result):
 				dispatch(DataRequestAction(dataSet: .featuredCollection,
 										   loadingState: .success(result)))
-			}
-		case .failure(let error):
-			DispatchQueue.main.async {
+			case .failure(let error):
 				dispatch(DataRequestAction(dataSet: .featuredCollection,
 										   loadingState: .error(error)))
 			}
 		}
-		}?.resume()
+	}?.resume()
 }

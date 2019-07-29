@@ -74,6 +74,14 @@ extension FeaturedCollectionViewController: UITableViewDataSource, UITableViewDe
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 160
 	}
+
+	func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+		let selectedCollection = featuredCollections[indexPath.row]
+		let collectionDetailsViewController = CollectionDetailsViewController(nibName: "CollectionDetailsViewController",
+																			  bundle: nil)
+		collectionDetailsViewController.collection = selectedCollection
+		show(collectionDetailsViewController, sender: self)
+	}
 }
 
 fileprivate let fetchFeaturedCollectionThunk = Thunk<PixelsAppState> { (dispatch, getState) in

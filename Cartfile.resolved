@@ -1,2 +1,3 @@
 github "ReSwift/ReSwift" "4.1.1"
 github "ReSwift/ReSwift-Thunk" "1.1.0"
+github "SoySauceLab/CollectionKit" "2.4.0"

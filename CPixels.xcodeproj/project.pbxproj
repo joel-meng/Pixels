@@ -19,6 +19,8 @@
 		DB591BE622EDCAAF0093AE24 /* FeaturedCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB591BE422EDCAAF0093AE24 /* FeaturedCollectionViewController.xib */; };
 		DB591BE922EDCB310093AE24 /* FeaturedCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BE722EDCB310093AE24 /* FeaturedCollectionTableViewCell.swift */; };
 		DB591BEA22EDCB310093AE24 /* FeaturedCollectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB591BE822EDCB310093AE24 /* FeaturedCollectionTableViewCell.xib */; };
+		DB591BEE22EDE3700093AE24 /* CollectionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BEC22EDE3700093AE24 /* CollectionDetailsViewController.swift */; };
+		DB591BEF22EDE3700093AE24 /* CollectionDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB591BED22EDE3700093AE24 /* CollectionDetailsViewController.xib */; };
 		DB7B15F922E881A90058428C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B15F822E881A90058428C /* AppDelegate.swift */; };
 		DB7B160022E881AA0058428C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB7B15FF22E881AA0058428C /* Assets.xcassets */; };
 		DB7B160322E881AA0058428C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB7B160122E881AA0058428C /* LaunchScreen.storyboard */; };
@@ -29,7 +31,6 @@
 		DB7B164322E88F7F0058428C /* Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163022E88F7F0058428C /* Rest.swift */; };
 		DB7B164422E88F7F0058428C /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163222E88F7F0058428C /* HTTPMethod.swift */; };
 		DB7B164522E88F7F0058428C /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163322E88F7F0058428C /* Response.swift */; };
-		DB7B164722E88F7F0058428C /* UnsplashCollectiona.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163622E88F7F0058428C /* UnsplashCollectiona.swift */; };
 		DB7B164822E88F7F0058428C /* RestRequestMethodDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163922E88F7F0058428C /* RestRequestMethodDecorator.swift */; };
 		DB7B164922E88F7F0058428C /* RestRequestURLQueryDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163A22E88F7F0058428C /* RestRequestURLQueryDecorator.swift */; };
 		DB7B164A22E88F7F0058428C /* UnsplashRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B163B22E88F7F0058428C /* UnsplashRequest.swift */; };
@@ -70,6 +71,8 @@
 		DB591BE422EDCAAF0093AE24 /* FeaturedCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeaturedCollectionViewController.xib; sourceTree = "<group>"; };
 		DB591BE722EDCB310093AE24 /* FeaturedCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCollectionTableViewCell.swift; sourceTree = "<group>"; };
 		DB591BE822EDCB310093AE24 /* FeaturedCollectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeaturedCollectionTableViewCell.xib; sourceTree = "<group>"; };
+		DB591BEC22EDE3700093AE24 /* CollectionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailsViewController.swift; sourceTree = "<group>"; };
+		DB591BED22EDE3700093AE24 /* CollectionDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionDetailsViewController.xib; sourceTree = "<group>"; };
 		DB7B15F522E881A90058428C /* CPixels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPixels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB7B15F822E881A90058428C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB7B15FF22E881AA0058428C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -84,7 +87,6 @@
 		DB7B163022E88F7F0058428C /* Rest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rest.swift; sourceTree = "<group>"; };
 		DB7B163222E88F7F0058428C /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		DB7B163322E88F7F0058428C /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
-		DB7B163622E88F7F0058428C /* UnsplashCollectiona.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsplashCollectiona.swift; sourceTree = "<group>"; };
 		DB7B163922E88F7F0058428C /* RestRequestMethodDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequestMethodDecorator.swift; sourceTree = "<group>"; };
 		DB7B163A22E88F7F0058428C /* RestRequestURLQueryDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequestURLQueryDecorator.swift; sourceTree = "<group>"; };
 		DB7B163B22E88F7F0058428C /* UnsplashRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsplashRequest.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 		DB591BCD22EB40730093AE24 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				DB591BEB22EDE1C50093AE24 /* CollectionDetails */,
 				DB591BDF22ECA8A00093AE24 /* FeaturedCollections */,
 			);
 			path = Scene;
@@ -190,6 +193,15 @@
 				DB591BE422EDCAAF0093AE24 /* FeaturedCollectionViewController.xib */,
 			);
 			path = FeaturedCollections;
+			sourceTree = "<group>";
+		};
+		DB591BEB22EDE1C50093AE24 /* CollectionDetails */ = {
+			isa = PBXGroup;
+			children = (
+				DB591BEC22EDE3700093AE24 /* CollectionDetailsViewController.swift */,
+				DB591BED22EDE3700093AE24 /* CollectionDetailsViewController.xib */,
+			);
+			path = CollectionDetails;
 			sourceTree = "<group>";
 		};
 		DB7B15EC22E881A90058428C = {
@@ -277,7 +289,6 @@
 				DB7B165222E898BA0058428C /* Tag.swift */,
 				DB7B164F22E898BA0058428C /* Url.swift */,
 				DB7B165422E898BA0058428C /* User.swift */,
-				DB7B163622E88F7F0058428C /* UnsplashCollectiona.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -396,6 +407,7 @@
 			files = (
 				DB591BEA22EDCB310093AE24 /* FeaturedCollectionTableViewCell.xib in Resources */,
 				DB591BE622EDCAAF0093AE24 /* FeaturedCollectionViewController.xib in Resources */,
+				DB591BEF22EDE3700093AE24 /* CollectionDetailsViewController.xib in Resources */,
 				DB7B160322E881AA0058428C /* LaunchScreen.storyboard in Resources */,
 				DB7B160022E881AA0058428C /* Assets.xcassets in Resources */,
 			);
@@ -421,12 +433,14 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/ReSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReSwiftThunk.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CollectionKit.framework",
 			);
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReSwiftThunk.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CollectionKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -446,6 +460,7 @@
 				DB7B165B22E898BA0058428C /* CoverPhoto.swift in Sources */,
 				DB7B165A22E898BA0058428C /* Tag.swift in Sources */,
 				DB7B164D22E88F7F0058428C /* URLSessionDataTaskProtocol.swift in Sources */,
+				DB591BEE22EDE3700093AE24 /* CollectionDetailsViewController.swift in Sources */,
 				DB7B165D22E898BA0058428C /* UnsplashCollection.swift in Sources */,
 				DB7B164022E88F7F0058428C /* HTTPURLResponse+Status.swift in Sources */,
 				DB591BCA22EB37930093AE24 /* Reader.swift in Sources */,
@@ -465,7 +480,6 @@
 				DB7B164322E88F7F0058428C /* Rest.swift in Sources */,
 				DB7B165822E898BA0058428C /* PreviewPhoto.swift in Sources */,
 				DB7B164922E88F7F0058428C /* RestRequestURLQueryDecorator.swift in Sources */,
-				DB7B164722E88F7F0058428C /* UnsplashCollectiona.swift in Sources */,
 				DB7B164C22E88F7F0058428C /* BlazingFastURLSession.swift in Sources */,
 				DB7B164222E88F7F0058428C /* UnsplashService.swift in Sources */,
 				DB7B15F922E881A90058428C /* AppDelegate.swift in Sources */,

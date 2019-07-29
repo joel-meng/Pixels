@@ -9,7 +9,7 @@
 import Foundation
 import ReSwift
 
-protocol DataAction: Action {
+protocol RestAction: Action {
 
 	var dataSet: PixelsData { get }
 
@@ -29,7 +29,7 @@ enum PixelsData {
 	case featuredCollection
 }
 
-struct DataRequestAction: DataAction {
+struct DataRequestAction: RestAction {
 
 	let dataSet: PixelsData
 	
@@ -46,3 +46,15 @@ struct ImageFetchAction: DownloadAction {
 
 	let loadingState: AsyncLoadingState
 }
+
+// MARK: - User Interaction Action
+
+protocol UserInteractionAction: Action {}
+
+enum UserSelectionAction: UserInteractionAction, Equatable {
+
+	case selectedFeatureCollection(Int)
+}
+
+
+

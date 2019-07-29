@@ -46,6 +46,7 @@
 		DB7B165D22E898BA0058428C /* UnsplashCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165522E898BA0058428C /* UnsplashCollection.swift */; };
 		DB7B165F22E89B020058428C /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165E22E89B020058428C /* Link.swift */; };
 		DB7B166122E89E5A0058428C /* RestRequestAuthorizationDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B166022E89E5A0058428C /* RestRequestAuthorizationDecorator.swift */; };
+		DB7F2D0822EF103C001BBA11 /* MyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F2D0722EF103C001BBA11 /* MyCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		DB7B165522E898BA0058428C /* UnsplashCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsplashCollection.swift; sourceTree = "<group>"; };
 		DB7B165E22E89B020058428C /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		DB7B166022E89E5A0058428C /* RestRequestAuthorizationDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestRequestAuthorizationDecorator.swift; sourceTree = "<group>"; };
+		DB7F2D0722EF103C001BBA11 /* MyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				DB591BC922EB37930093AE24 /* Reader.swift */,
+				DB7F2D0722EF103C001BBA11 /* MyCollectionView.swift */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				DB7B15F922E881A90058428C /* AppDelegate.swift in Sources */,
 				DB591BE522EDCAAF0093AE24 /* FeaturedCollectionViewController.swift in Sources */,
 				DB7B165C22E898BA0058428C /* User.swift in Sources */,
+				DB7F2D0822EF103C001BBA11 /* MyCollectionView.swift in Sources */,
 				DB591BE922EDCB310093AE24 /* FeaturedCollectionTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

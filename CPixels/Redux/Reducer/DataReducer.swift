@@ -63,3 +63,17 @@ func photoLoadingStateReducer(action: Action, state: PhotoLoadingState?) -> Phot
 
 	return state
 }
+
+func userInteractionStateReducer(action: Action, state: UserInteractionState?) -> UserInteractionState {
+
+	var state = state ?? UserInteractionState()
+
+	guard let action = action as? UserSelectionAction else { return state }
+
+	switch action {
+	case .selectedFeatureCollection:
+		state.selectedFeatureCollection = action
+	}
+
+	return state
+}

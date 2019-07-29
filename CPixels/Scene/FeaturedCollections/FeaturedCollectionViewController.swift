@@ -36,7 +36,9 @@ class FeaturedCollectionViewController: UIViewController {
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		store.dispatch(fetchFeaturedCollectionThunk)
+		if featuredCollections.isEmpty {
+			store.dispatch(fetchFeaturedCollectionThunk)
+		}
 	}
 
 	override func viewDidDisappear(_ animated: Bool) {
@@ -76,10 +78,12 @@ extension FeaturedCollectionViewController: UITableViewDataSource, UITableViewDe
 	}
 
 	func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-		let selectedCollection = featuredCollections[indexPath.row]
+		let selectedCollectionId = featuredCollections[indexPath.row].id
+
+		store.dispatch(UserSelectionAction.selectedFeatureCollection(selectedCollectionId!))
+
 		let collectionDetailsViewController = CollectionDetailsViewController(nibName: "CollectionDetailsViewController",
 																			  bundle: nil)
-		collectionDetailsViewController.collection = selectedCollection
 		show(collectionDetailsViewController, sender: self)
 	}
 }

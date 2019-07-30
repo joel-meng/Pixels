@@ -19,7 +19,7 @@ struct UnsplashService {
 	}
 
 	static func listCollections(completion: @escaping (_ response: Response<[UnsplashCollection]>) -> Void) -> URLSessionDataTaskProtocol? {
-		let listCollectionsRequest = unsplashGETRequest(path: "/collections/featured")
+		let listCollectionsRequest = unsplashGETRequest(path: "/collections")
 		let dateDecodingFormatter = JSONDecoder.DateDecodingStrategy.formatted(DateFormatter.rfc3339DateFormatter)
 
 		return Rest.load(request: listCollectionsRequest,

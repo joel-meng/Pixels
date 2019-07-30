@@ -19,6 +19,7 @@ protocol RestAction: Action {
 enum AsyncLoadingState {
 
 	case notStarted
+	case cached
 	case started
 	case success(Any)
 	case error(Error)

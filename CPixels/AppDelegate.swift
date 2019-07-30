@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let featuredCollectionsViewController = FeaturedCollectionViewController(nibName: "FeaturedCollectionViewController",
 																				 bundle: nil)
 
+//		let featuredCollectionsViewController = CollectionDetailsViewController(nibName: "CollectionDetailsViewController",
+//																				bundle: nil)
+
 		window?.rootViewController = UINavigationController(rootViewController: featuredCollectionsViewController)
 
 		window?.makeKeyAndVisible()

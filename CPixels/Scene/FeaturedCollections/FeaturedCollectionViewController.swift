@@ -54,8 +54,12 @@ extension FeaturedCollectionViewController: StoreSubscriber {
 			return
 		}
 		if case .ready? = state.loadingState.tasks[.featuredCollection] {
-			self.featuredCollections =  state.dataState.unsplashFeaturedCollections
-			tableView.reloadData()
+			if state.dataState.unsplashFeaturedCollections != self.featuredCollections {
+				self.featuredCollections =  state.dataState.unsplashFeaturedCollections
+				DispatchQueue.main.async { [weak self] in
+					self?.tableView.reloadData()
+				}
+			}
 		}
 	}
 }
@@ -77,13 +81,15 @@ extension FeaturedCollectionViewController: UITableViewDataSource, UITableViewDe
 		return 160
 	}
 
-	func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-		let selectedCollectionId = featuredCollections[indexPath.row].id
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let selectedCollection = featuredCollections[indexPath.row]
 
-		store.dispatch(UserSelectionAction.selectedFeatureCollection(selectedCollectionId!))
+		print("selected \(selectedCollection.title)")
+//		store.dispatch(UserSelectionAction.selectedFeatureCollection(selectedCollectionId!))
 
 		let collectionDetailsViewController = CollectionDetailsViewController(nibName: "CollectionDetailsViewController",
 																			  bundle: nil)
+		collectionDetailsViewController.featuredCollection = selectedCollection
 		show(collectionDetailsViewController, sender: self)
 	}
 }

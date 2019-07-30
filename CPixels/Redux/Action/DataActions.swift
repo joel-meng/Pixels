@@ -10,31 +10,19 @@ import Foundation
 import ReSwift
 
 protocol RestAction: Action {
-
-	var dataSet: PixelsData { get }
-
-	var loadingState: AsyncLoadingState { get }
 }
 
 enum AsyncLoadingState {
 
 	case notStarted
-	case cached
 	case started
 	case success(Any)
 	case error(Error)
 }
 
-enum PixelsData {
+enum RestFetch: Action {
 
-	case featuredCollection
-}
-
-struct DataRequestAction: RestAction {
-
-	let dataSet: PixelsData
-	
-	let loadingState: AsyncLoadingState
+	case fetchCollections(RestFetchingState<[UnsplashCollection]>)
 }
 
 // MARK: - Image Download Action

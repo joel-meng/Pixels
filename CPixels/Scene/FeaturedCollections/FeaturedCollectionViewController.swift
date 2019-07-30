@@ -12,6 +12,8 @@ import ReSwiftThunk
 
 class FeaturedCollectionViewController: UIViewController {
 
+	@IBOutlet var loadingIndicator: UIActivityIndicatorView!
+
 	@IBOutlet var tableView: UITableView! {
 		didSet {
 			self.tableView.dataSource = self
@@ -30,14 +32,17 @@ class FeaturedCollectionViewController: UIViewController {
 		title = "Featured"
 
 		store.subscribe(self) { subscription in
-			subscription.skip(when: ==)
+			subscription.select({ (state) in
+				return state.unsplashData.collectionScene
+			}).skipRepeats()
+
 		}
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		if featuredCollections.isEmpty {
-			store.dispatch(fetchFeaturedCollectionThunk)
+			store.dispatch(fetchCollectionThunk)
 		}
 	}
 
@@ -45,21 +50,50 @@ class FeaturedCollectionViewController: UIViewController {
 		super.viewDidDisappear(animated)
 		store.unsubscribe(self)
 	}
+
+	// MARK: - UI
+
+	private func showLoading() {
+		DispatchQueue.main.async { [weak tableView, loadingIndicator] in
+			tableView?.isHidden = true
+			loadingIndicator?.startAnimating()
+			loadingIndicator?.isHidden = false
+		}
+	}
+
+	private func showCollection(_ collection: [UnsplashCollection]) {
+		featuredCollections = collection
+
+		DispatchQueue.main.async { [weak tableView, loadingIndicator] in
+			tableView?.isHidden = false
+			tableView?.reloadData()
+			loadingIndicator?.stopAnimating()
+			loadingIndicator?.isHidden = true
+		}
+	}
+
+	private func showError(_ message: String) {
+
+	}
 }
+
+
 
 extension FeaturedCollectionViewController: StoreSubscriber {
 
-	func newState(state: PixelsAppState) {
-		if case .loading? = state.loadingState.tasks[.featuredCollection] {
-			return
-		}
-		if case .ready? = state.loadingState.tasks[.featuredCollection] {
-			if state.dataState.unsplashFeaturedCollections != self.featuredCollections {
-				self.featuredCollections =  state.dataState.unsplashFeaturedCollections
-				DispatchQueue.main.async { [weak self] in
-					self?.tableView.reloadData()
-				}
-			}
+	func newState(state: CollectionsSceneState) {
+
+		switch state.unsplashCollectionsState {
+		case .loading:
+			showLoading()
+		case .ready(let data):
+			showCollection(data)
+		case .error(let errorMessage):
+			showError(errorMessage)
+		case .outdated:
+			showCollection([])
+		default:
+			break
 		}
 	}
 }
@@ -84,7 +118,6 @@ extension FeaturedCollectionViewController: UITableViewDataSource, UITableViewDe
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let selectedCollection = featuredCollections[indexPath.row]
 
-		print("selected \(selectedCollection.title)")
 //		store.dispatch(UserSelectionAction.selectedFeatureCollection(selectedCollectionId!))
 
 		let collectionDetailsViewController = CollectionDetailsViewController(nibName: "CollectionDetailsViewController",
@@ -94,21 +127,20 @@ extension FeaturedCollectionViewController: UITableViewDataSource, UITableViewDe
 	}
 }
 
-fileprivate let fetchFeaturedCollectionThunk = Thunk<PixelsAppState> { (dispatch, getState) in
+fileprivate let fetchCollectionThunk = Thunk<PixelsAppState> { (dispatch, getState) in
 
 	guard let state = getState() else { return }
 
-	dispatch(DataRequestAction(dataSet: .featuredCollection, loadingState: .started))
+
+	dispatch(RestFetch.fetchCollections(.loading))
 
 	UnsplashService.listCollections { (response) in
 		DispatchQueue.main.async {
 			switch response {
 			case .success(let result):
-				dispatch(DataRequestAction(dataSet: .featuredCollection,
-										   loadingState: .success(result)))
+				dispatch(RestFetch.fetchCollections(.ready(result)))
 			case .failure(let error):
-				dispatch(DataRequestAction(dataSet: .featuredCollection,
-										   loadingState: .error(error)))
+				dispatch(RestFetch.fetchCollections(.error("\(error)")))
 			}
 		}
 	}?.resume()

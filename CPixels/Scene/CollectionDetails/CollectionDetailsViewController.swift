@@ -23,9 +23,11 @@ class CollectionDetailsViewController: UIViewController {
         super.viewDidLoad()
 		title = "Previews"
 
-		store.subscribe(self)
-		{ subscription in
+		store.subscribe(self) { subscription in
 			subscription.select { $0.photoState }
+//				.skipRepeats({ (_, _) -> Bool in
+//				false
+//			})
 		}
 
 		configCollectionView(collectionView)
@@ -111,7 +113,7 @@ private func fetchImage(withURL imageUrl: String) -> Thunk<PixelsAppState> {
 		guard let state = getState() else { return }
 
 		if nil != state.photoState.loaded[imageUrl] {
-			dispatch(ImageFetchAction(imageURL: imageUrl, loadingState: .cached))
+//			dispatch(ImageFetchAction(imageURL: imageUrl, loadingState: .cached))
 			return
 		}
 

@@ -28,5 +28,6 @@ let loggingMiddleware: Middleware<Any> = { dispatch, getState in
 let store = Store(
 	reducer: reducer,
 	state: PixelsAppState(),
-	middleware: [thunkMiddleware]//, loggingMiddleware]
+	middleware: [thunkMiddleware],//, loggingMiddleware],
+	automaticallySkipsRepeats: false
 )

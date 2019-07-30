@@ -10,11 +10,11 @@ import Foundation
 import ReSwift
 import UIKit
 
+
+
 struct PixelsAppState: StateType, Equatable {
 
-	var dataState: PixelsDataState = PixelsDataState()
-
-	var loadingState: LoadingTaskState = LoadingTaskState()
+	var unsplashData: PixelsDataState = PixelsDataState()
 
 	var photoState: PhotoLoadingState = PhotoLoadingState()
 
@@ -23,7 +23,24 @@ struct PixelsAppState: StateType, Equatable {
 
 struct PixelsDataState: StateType, Equatable {
 
-	var unsplashFeaturedCollections: [UnsplashCollection] = []
+	var collectionScene: CollectionsSceneState = CollectionsSceneState()
+}
+
+struct CollectionsSceneState: StateType, Equatable {
+
+	var unsplashCollectionsState: RestFetchingState = RestFetchingState<[UnsplashCollection]>.notStarted
+}
+
+
+
+// MARK: - Rest Data
+
+enum RestFetchingState<Data>: Equatable where Data: Equatable {
+	case notStarted
+	case loading
+	case ready(Data)
+	case outdated
+	case error(String)
 }
 
 // MARK: - Rest Data State
@@ -37,10 +54,6 @@ enum DataReadyState {
 	case error
 }
 
-struct LoadingTaskState: StateType, Equatable {
-
-	var tasks: [PixelsData: DataReadyState] = [:]
-}
 
 // MARK: - Loaded photos state
 

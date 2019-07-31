@@ -41,7 +41,7 @@ class SingleSectionTableDelegate<T>: NSObject, UITableViewDataSource, UITableVie
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 		let selectedCell = tableView.cellForRow(at: indexPath) as? ReflexTableViewCell<T>
-		selectedCell?.didTap?()
+		selectedCell?.didTap?(items[indexPath.row])
 	}
 }
 

@@ -11,7 +11,7 @@ import UIKit
 class ReflexTableViewCell<T>: UITableViewCell {
 
 	/// This function will be called when cell is tapped
-	public var didTap: (() -> Void)?
+	var didTap: ((T) -> Void)?
 
 	open override func prepareForReuse() {
 		didTap = nil

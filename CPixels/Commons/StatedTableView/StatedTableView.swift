@@ -46,9 +46,9 @@ final class StatedTableView: UIView {
 
 	// MARK: - TableView Updater
 
-	func updater<T>(bindAction: @escaping (T, ReflexTableViewCell<T>) -> Void) -> (_ state: StatedTableView.State<[T]>) -> Void {
+	func updater<T>(bindAction: @escaping (T) -> Void) -> (_ state: StatedTableView.State<[T]>) -> Void {
 		tableView.registerDefaultCell(for: T.self)
-		return customCellDataUpdater(for: self, bindAction)
+		return customCellDataUpdater(for: self, bindAction: bindAction)
 	}
 
 	// MARK: - UI State Control
@@ -100,7 +100,8 @@ final class StatedTableView: UIView {
 }
 
 func customCellDataUpdater
-	<T>(for statedTableView: StatedTableView, _ bindAction: @escaping (T, ReflexTableViewCell<T>) -> Void) -> (_ state: StatedTableView.State<[T]>) -> Void {
+	<T>(for statedTableView: StatedTableView,
+		bindAction: @escaping (T) -> Void) -> (_ state: StatedTableView.State<[T]>) -> Void {
 
 	guard let tableView = statedTableView.tableView else {
 		return { _ in }
@@ -112,7 +113,7 @@ func customCellDataUpdater
 
 	tableDataSourceAndDelegate.cell = { cell, item in
 		cell.config(item)
-		bindAction(item, cell)
+		cell.didTap = bindAction
 		return cell
 	}
 

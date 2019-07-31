@@ -16,17 +16,6 @@ class FeaturedCollectionViewController: UIViewController {
 
 	private var tableUpdater: ((StatedTableView.State<[UnsplashCollection]>) -> Void)?
 
-//	@IBOutlet var tableView: UITableView! {
-//		didSet {
-//			self.tableView.dataSource = self
-//			self.tableView.delegate = self
-//			tableView.contentInsetAdjustmentBehavior = .never
-//
-//			let nib = UINib(nibName: "FeaturedCollectionTableViewCell", bundle: nil)
-//			tableView.register(nib, forCellReuseIdentifier: "FeaturedCollectionTableViewCell")
-//		}
-//	}
-
 	var featuredCollections: [UnsplashCollection] = []
 
 	override func viewDidLoad() {
@@ -39,7 +28,12 @@ class FeaturedCollectionViewController: UIViewController {
 			}).skipRepeats()
 		}
 
-		tableUpdater = statedTableView.updater { (item, cell) in}
+		tableUpdater = statedTableView.updater { [weak self] item in
+			let detailsViewController = CollectionDetailsViewController(nibName: "CollectionDetailsViewController",
+																		bundle: nil)
+			detailsViewController.featuredCollection = item
+			self?.show(detailsViewController, sender: self)
+		}
 	}
 
 	override func viewWillAppear(_ animated: Bool) {

@@ -16,10 +16,10 @@
 		DB2E01A222F12DA2008AFEE0 /* UITableViewCellExtension+NamingConventions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E019E22F12DA2008AFEE0 /* UITableViewCellExtension+NamingConventions.swift */; };
 		DB2E01A622F12EED008AFEE0 /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E01A522F12EED008AFEE0 /* UIView+AutoLayout.swift */; };
 		DB2E01A822F12F27008AFEE0 /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E01A722F12F27008AFEE0 /* UIView+Nib.swift */; };
+		DB2E01AA22F17B82008AFEE0 /* FetchImageThunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E01A922F17B82008AFEE0 /* FetchImageThunk.swift */; };
 		DB591BCA22EB37930093AE24 /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BC922EB37930093AE24 /* Reader.swift */; };
 		DB591BCC22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BCB22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift */; };
 		DB591BD022EB40980093AE24 /* PixelsAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BCF22EB40980093AE24 /* PixelsAppState.swift */; };
-		DB591BD422EB41420093AE24 /* AppStartedAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BD322EB41420093AE24 /* AppStartedAction.swift */; };
 		DB591BD722EB4A9F0093AE24 /* MainReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BD622EB4A9F0093AE24 /* MainReducer.swift */; };
 		DB591BDA22EB4AC60093AE24 /* PixelsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BD922EB4AC60093AE24 /* PixelsStore.swift */; };
 		DB591BDC22EB4AE60093AE24 /* DataReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BDB22EB4AE60093AE24 /* DataReducer.swift */; };
@@ -78,10 +78,10 @@
 		DB2E019E22F12DA2008AFEE0 /* UITableViewCellExtension+NamingConventions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCellExtension+NamingConventions.swift"; sourceTree = "<group>"; };
 		DB2E01A522F12EED008AFEE0 /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
 		DB2E01A722F12F27008AFEE0 /* UIView+Nib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Nib.swift"; sourceTree = "<group>"; };
+		DB2E01A922F17B82008AFEE0 /* FetchImageThunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageThunk.swift; sourceTree = "<group>"; };
 		DB591BC922EB37930093AE24 /* Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader.swift; sourceTree = "<group>"; };
 		DB591BCB22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnsplashRequestCreator'.swift"; sourceTree = "<group>"; };
 		DB591BCF22EB40980093AE24 /* PixelsAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelsAppState.swift; sourceTree = "<group>"; };
-		DB591BD322EB41420093AE24 /* AppStartedAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartedAction.swift; sourceTree = "<group>"; };
 		DB591BD622EB4A9F0093AE24 /* MainReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainReducer.swift; sourceTree = "<group>"; };
 		DB591BD922EB4AC60093AE24 /* PixelsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelsStore.swift; sourceTree = "<group>"; };
 		DB591BDB22EB4AE60093AE24 /* DataReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataReducer.swift; sourceTree = "<group>"; };
@@ -207,8 +207,8 @@
 		DB591BD222EB412C0093AE24 /* Action */ = {
 			isa = PBXGroup;
 			children = (
-				DB591BD322EB41420093AE24 /* AppStartedAction.swift */,
 				DB591BDD22EB4BBB0093AE24 /* DataActions.swift */,
+				DB2E01A922F17B82008AFEE0 /* FetchImageThunk.swift */,
 			);
 			path = Action;
 			sourceTree = "<group>";
@@ -525,11 +525,11 @@
 				DB7B165F22E89B020058428C /* Link.swift in Sources */,
 				DB7B164422E88F7F0058428C /* HTTPMethod.swift in Sources */,
 				DB7B164A22E88F7F0058428C /* UnsplashRequest.swift in Sources */,
+				DB2E01AA22F17B82008AFEE0 /* FetchImageThunk.swift in Sources */,
 				DB7B165722E898BA0058428C /* Url.swift in Sources */,
 				DB7B166122E89E5A0058428C /* RestRequestAuthorizationDecorator.swift in Sources */,
 				DB2E019422F10F9B008AFEE0 /* StatedTableView.swift in Sources */,
 				DB7B164B22E88F7F0058428C /* RestRequest.swift in Sources */,
-				DB591BD422EB41420093AE24 /* AppStartedAction.swift in Sources */,
 				DB7B164822E88F7F0058428C /* RestRequestMethodDecorator.swift in Sources */,
 				DB591BDE22EB4BBB0093AE24 /* DataActions.swift in Sources */,
 				DB7B164322E88F7F0058428C /* Rest.swift in Sources */,

@@ -12,7 +12,12 @@ final class StatedTableView: UIView {
 
 	// MARK: - IBOutlet
 
-	@IBOutlet var tableView: UITableView!
+	@IBOutlet var tableView: UITableView! {
+		didSet {
+			tableView.separatorStyle = .none
+			tableView.contentInsetAdjustmentBehavior = .never
+		}
+	}
 
 	@IBOutlet var messageLabel: UILabel!
 
@@ -35,33 +40,18 @@ final class StatedTableView: UIView {
 	// MARK: - Setup
 
 	private func setup() {
-		// Load View
 		Bundle.main.loadNibNamed(defaultNibName(), owner: self, options: nil)
 		contentView.fixInView(self)
 	}
 
 	// MARK: - TableView Updater
 
-	func updater<T, C: ReflexTableViewCell<T>>(bindAction: @escaping (T, C) -> Void) -> (_ state: StatedTableView.State<[T]>) -> Void {
+	func updater<T>(bindAction: @escaping (T, ReflexTableViewCell<T>) -> Void) -> (_ state: StatedTableView.State<[T]>) -> Void {
+		tableView.registerDefaultCell(for: T.self)
 		return customCellDataUpdater(for: self, bindAction)
 	}
 
 	// MARK: - UI State Control
-
-	func updateState<T>(_ state: State<T>) {
-		switch state {
-		case .initial:
-			showInitial()
-		case .empty:
-			showMessage("No data found. 🎁")
-		case .data(let items):
-			showCollection(items)
-		case .error(let error):
-			showMessage("\(error) 🎭")
-		case .loading:
-			showLoading()
-		}
-	}
 
 	fileprivate func showInitial() {
 		DispatchQueue.main.async { [weak tableView, activityIndicator, messageLabel] in
@@ -84,7 +74,6 @@ final class StatedTableView: UIView {
 
 		DispatchQueue.main.async { [weak tableView, activityIndicator, messageLabel] in
 			tableView?.isHidden = false
-			tableView?.reloadData()
 			activityIndicator?.stopAnimating()
 			activityIndicator?.isHidden = true
 			messageLabel?.isHidden = true
@@ -111,16 +100,21 @@ final class StatedTableView: UIView {
 }
 
 func customCellDataUpdater
-	<T, C: ReflexTableViewCell<T>>(for statedTableView: StatedTableView, _ bindAction: @escaping (T, C) -> Void) -> (_ state: StatedTableView.State<[T]>) -> Void {
+	<T>(for statedTableView: StatedTableView, _ bindAction: @escaping (T, ReflexTableViewCell<T>) -> Void) -> (_ state: StatedTableView.State<[T]>) -> Void {
 
-	let tableView = statedTableView.tableView
+	guard let tableView = statedTableView.tableView else {
+		return { _ in }
+	}
 
-	tableView?.registerDefaultCell(for: T.self)
-
-	// Bind tableview with data source and delegate
 	let tableDataSourceAndDelegate = SingleSectionTableDelegate<T>()
-	tableView?.dataSource = tableDataSourceAndDelegate
-	tableView?.delegate = tableDataSourceAndDelegate
+	tableView.dataSource = tableDataSourceAndDelegate
+	tableView.delegate = tableDataSourceAndDelegate
+
+	tableDataSourceAndDelegate.cell = { cell, item in
+		cell.config(item)
+		bindAction(item, cell)
+		return cell
+	}
 
 	return { [weak statedTableView] state in
 
@@ -141,18 +135,6 @@ func customCellDataUpdater
 
 		case .data(let items):
 			tableDataSourceAndDelegate.items = items
-			tableDataSourceAndDelegate.cell = { indexPath, tableView in
-
-				let cell: C = tableView.dequeueDefaultReusableCell(forIndexPath: indexPath)
-
-				let item = items[indexPath.row]
-
-				cell.config(item)
-
-				bindAction(item, cell)
-				return cell
-			}
-
 			statedTableView.showCollection(items)
 		}
 	}

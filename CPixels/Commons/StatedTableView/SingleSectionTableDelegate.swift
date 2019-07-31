@@ -11,7 +11,7 @@ import UIKit
 class SingleSectionTableDelegate<T>: NSObject, UITableViewDataSource, UITableViewDelegate {
 
 	/// Closure to configure an paticular tableview cell
-	var cell: ((IndexPath, UITableView) -> UITableViewCell) = { _ , _  in
+	var cell: ((ReflexTableViewCell<T>, T) -> UITableViewCell) = { _ , _ in
 		return UITableViewCell(style: .default, reuseIdentifier: "")
 	}
 
@@ -30,7 +30,8 @@ class SingleSectionTableDelegate<T>: NSObject, UITableViewDataSource, UITableVie
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return cell(indexPath, tableView)
+		let dequeuedCell = tableView.dequeueDefaultReusableCell(forIndexPath: indexPath) as ReflexTableViewCell<T>
+		return cell(dequeuedCell, items[indexPath.row])
 	}
 
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

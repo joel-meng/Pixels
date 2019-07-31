@@ -36,7 +36,7 @@ final class UnsplashCollectionTableViewCell: ReflexTableViewCell<UnsplashCollect
 
 		configTitleOnlyMode(withTitle: item.title)
 
-		if let coverPhotoURL = item.coverPhoto?.urls?.regular {
+		if let coverPhotoURL = item.coverPhoto?.urls?.small {
 
 			self.coverPhotoURL = coverPhotoURL
 
@@ -90,25 +90,5 @@ extension UnsplashCollectionTableViewCell: StoreSubscriber {
 		DispatchQueue.main.async { [weak self] in
 			self?.configTitleAndImageMode(withImage: image)
 		}
-	}
-}
-
-private func fetchImage(withURL imageUrl: String) -> Thunk<PixelsAppState> {
-
-	return Thunk<PixelsAppState> { (dispatch, getState) in
-
-		guard let state = getState() else { return }
-
-		if let alreadyLoadedImage = state.photoState.loaded[imageUrl] {
-			dispatch(ImageFetchAction(imageURL: imageUrl, loadingState: .success(alreadyLoadedImage)))
-			return
-		}
-
-		dispatch(ImageFetchAction(imageURL: imageUrl, loadingState: .started))
-
-		UnsplashService.loadImage(withURL: imageUrl, completion: { (result) in
-			guard let loadedImage = try? result.get() else { return }
-			dispatch(ImageFetchAction(imageURL: imageUrl, loadingState: .success(loadedImage)))
-		})?.resume()
 	}
 }

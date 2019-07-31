@@ -105,23 +105,3 @@ extension CollectionDetailsViewController: StoreSubscriber {
 		}
 	}
 }
-
-private func fetchImage(withURL imageUrl: String) -> Thunk<PixelsAppState> {
-
-	return Thunk<PixelsAppState> { (dispatch, getState) in
-
-		guard let state = getState() else { return }
-
-		if nil != state.photoState.loaded[imageUrl] {
-//			dispatch(ImageFetchAction(imageURL: imageUrl, loadingState: .cached))
-			return
-		}
-
-		dispatch(ImageFetchAction(imageURL: imageUrl, loadingState: .started))
-
-		UnsplashService.loadImage(withURL: imageUrl, completion: { (result) in
-			guard let loadedImage = try? result.get() else { return }
-			dispatch(ImageFetchAction(imageURL: imageUrl, loadingState: .success(loadedImage)))
-		})?.resume()
-	}
-}

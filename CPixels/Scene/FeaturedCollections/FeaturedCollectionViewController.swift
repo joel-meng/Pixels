@@ -12,31 +12,34 @@ import ReSwiftThunk
 
 class FeaturedCollectionViewController: UIViewController {
 
-	@IBOutlet var loadingIndicator: UIActivityIndicatorView!
+	@IBOutlet var statedTableView: StatedTableView!
 
-	@IBOutlet var tableView: UITableView! {
-		didSet {
-			self.tableView.dataSource = self
-			self.tableView.delegate = self
-			tableView.contentInsetAdjustmentBehavior = .never
+	private var tableUpdater: ((StatedTableView.State<[UnsplashCollection]>) -> Void)?
 
-			let nib = UINib(nibName: "FeaturedCollectionTableViewCell", bundle: nil)
-			tableView.register(nib, forCellReuseIdentifier: "FeaturedCollectionTableViewCell")
-		}
-	}
+//	@IBOutlet var tableView: UITableView! {
+//		didSet {
+//			self.tableView.dataSource = self
+//			self.tableView.delegate = self
+//			tableView.contentInsetAdjustmentBehavior = .never
+//
+//			let nib = UINib(nibName: "FeaturedCollectionTableViewCell", bundle: nil)
+//			tableView.register(nib, forCellReuseIdentifier: "FeaturedCollectionTableViewCell")
+//		}
+//	}
 
 	var featuredCollections: [UnsplashCollection] = []
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		title = "Featured"
+		title = "Collections"
 
 		store.subscribe(self) { subscription in
 			subscription.select({ (state) in
 				return state.unsplashData.collectionScene
 			}).skipRepeats()
-
 		}
+
+		tableUpdater = statedTableView.updater { (item, cell) in}
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -51,79 +54,30 @@ class FeaturedCollectionViewController: UIViewController {
 		store.unsubscribe(self)
 	}
 
-	// MARK: - UI
-
-	private func showLoading() {
-		DispatchQueue.main.async { [weak tableView, loadingIndicator] in
-			tableView?.isHidden = true
-			loadingIndicator?.startAnimating()
-			loadingIndicator?.isHidden = false
-		}
-	}
-
-	private func showCollection(_ collection: [UnsplashCollection]) {
-		featuredCollections = collection
-
-		DispatchQueue.main.async { [weak tableView, loadingIndicator] in
-			tableView?.isHidden = false
-			tableView?.reloadData()
-			loadingIndicator?.stopAnimating()
-			loadingIndicator?.isHidden = true
-		}
-	}
-
-	private func showError(_ message: String) {
-
-	}
 }
-
-
 
 extension FeaturedCollectionViewController: StoreSubscriber {
 
 	func newState(state: CollectionsSceneState) {
 
 		switch state.unsplashCollectionsState {
+
 		case .loading:
-			showLoading()
+			let state = StatedTableView.State<[UnsplashCollection]>.loading
+			tableUpdater?(state)
 		case .ready(let data):
-			showCollection(data)
-		case .error(let errorMessage):
-			showError(errorMessage)
+			let state = StatedTableView.State<[UnsplashCollection]>.data(data)
+			tableUpdater?(state)
+		case .error(let error):
+			let state = StatedTableView.State<[UnsplashCollection]>.error(error)
+			tableUpdater?(state)
 		case .outdated:
-			showCollection([])
-		default:
-			break
+			let state = StatedTableView.State<[UnsplashCollection]>.empty
+			tableUpdater?(state)
+		case .notStarted:
+			let state = StatedTableView.State<[UnsplashCollection]>.initial
+			tableUpdater?(state)
 		}
-	}
-}
-
-extension FeaturedCollectionViewController: UITableViewDataSource, UITableViewDelegate {
-
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return featuredCollections.count
-	}
-
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "FeaturedCollectionTableViewCell",
-												 for: indexPath) as! FeatureCollectionTableViewCell
-		cell.configure(with: featuredCollections[indexPath.row])
-		return cell
-	}
-
-	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 160
-	}
-
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let selectedCollection = featuredCollections[indexPath.row]
-
-//		store.dispatch(UserSelectionAction.selectedFeatureCollection(selectedCollectionId!))
-
-		let collectionDetailsViewController = CollectionDetailsViewController(nibName: "CollectionDetailsViewController",
-																			  bundle: nil)
-		collectionDetailsViewController.featuredCollection = selectedCollection
-		show(collectionDetailsViewController, sender: self)
 	}
 }
 

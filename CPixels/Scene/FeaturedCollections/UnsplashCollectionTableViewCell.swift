@@ -11,7 +11,7 @@ import UIKit
 import ReSwift
 import ReSwiftThunk
 
-final class FeatureCollectionTableViewCell: UITableViewCell {
+final class UnsplashCollectionTableViewCell: ReflexTableViewCell<UnsplashCollection> {
 
 	@IBOutlet var titleOnlyView: UIView!
 	@IBOutlet var titleOnlyLabel: UILabel!
@@ -28,14 +28,15 @@ final class FeatureCollectionTableViewCell: UITableViewCell {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		selectionStyle = .none
+		imagedTitleView.layer.cornerRadius = 6
+		imagedTitleView.clipsToBounds = true
 	}
 
-	func configure(with model: UnsplashCollection) {
+	override func config(_ item: UnsplashCollection) {
 
-		configTitleOnlyMode(withTitle: model.title)
+		configTitleOnlyMode(withTitle: item.title)
 
-
-		if let coverPhotoURL = model.coverPhoto?.urls?.regular {
+		if let coverPhotoURL = item.coverPhoto?.urls?.regular {
 
 			self.coverPhotoURL = coverPhotoURL
 
@@ -77,7 +78,7 @@ final class FeatureCollectionTableViewCell: UITableViewCell {
 	}
 }
 
-extension FeatureCollectionTableViewCell: StoreSubscriber {
+extension UnsplashCollectionTableViewCell: StoreSubscriber {
 
 	func newState(state: PhotoLoadingState) {
 		if let coverPhotoURL = self.coverPhotoURL, let image = state.loaded[coverPhotoURL] {

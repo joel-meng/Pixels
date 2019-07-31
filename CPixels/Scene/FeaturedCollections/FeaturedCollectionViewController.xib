@@ -12,8 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeaturedCollectionViewController" customModule="CPixels" customModuleProvider="target">
             <connections>
-                <outlet property="loadingIndicator" destination="hY5-YI-d4O" id="x8g-Ib-M9n"/>
-                <outlet property="tableView" destination="WYl-bx-O9i" id="Uki-Xw-f6a"/>
+                <outlet property="statedTableView" destination="ZA6-Pp-JYa" id="SKG-zo-pv7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,22 +21,17 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYl-bx-O9i">
-                    <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZA6-Pp-JYa" customClass="StatedTableView" customModule="CPixels" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </tableView>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hY5-YI-d4O">
-                    <rect key="frame" x="197" y="438" width="20" height="20"/>
-                </activityIndicatorView>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="hY5-YI-d4O" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Ew6-0x-ItW"/>
-                <constraint firstAttribute="bottom" secondItem="WYl-bx-O9i" secondAttribute="bottom" id="WPt-tc-USx"/>
-                <constraint firstAttribute="trailing" secondItem="WYl-bx-O9i" secondAttribute="trailing" id="rSd-WV-MoB"/>
-                <constraint firstItem="hY5-YI-d4O" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="sMe-WH-XnS"/>
-                <constraint firstItem="WYl-bx-O9i" firstAttribute="top" secondItem="btN-aV-SSB" secondAttribute="top" id="suj-FV-OMl"/>
-                <constraint firstItem="WYl-bx-O9i" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tYd-I9-emb"/>
+                <constraint firstItem="ZA6-Pp-JYa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="6oH-ii-WAf"/>
+                <constraint firstItem="ZA6-Pp-JYa" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="h8e-X4-jyd"/>
+                <constraint firstItem="ZA6-Pp-JYa" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="m9t-cW-qLw"/>
+                <constraint firstItem="ZA6-Pp-JYa" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="n2d-K4-WVh"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="btN-aV-SSB"/>
             <point key="canvasLocation" x="-262" y="22"/>

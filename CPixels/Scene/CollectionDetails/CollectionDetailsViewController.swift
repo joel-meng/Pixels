@@ -11,39 +11,52 @@ import CollectionKit
 import ReSwift
 import ReSwiftThunk
 
-class CollectionDetailsViewController: UIViewController {
+final class CollectionDetailsViewController: UIViewController {
+
+	// MARK: - IBOutlets
 
 	@IBOutlet var collectionView: CollectionView!
 
-	var featuredCollection: UnsplashCollection?
+	// MARK: - Selections
+
+	var featuredCollection: UnsplashCollection? {
+		didSet {
+			collectionPhotoURLs = featuredCollection?.previewPhotos?.compactMap({ $0.urls?.small })
+		}
+	}
+
 	private var collectionPhotoURLs: [String]?
+
+	// MARK: - States
+
 	private var collectionProvider: BasicProvider<UIImage, UIImageView>?
+
+	// MARK: - Lifecycles
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-		title = "Previews"
+		title = featuredCollection?.title ?? "Previews"
 
-		store.subscribe(self) { subscription in
-			subscription.select { $0.photoState }
-//				.skipRepeats({ (_, _) -> Bool in
-//				false
-//			})
-		}
+		subscribePhotoStateSkippingRepeats()
 
 		configCollectionView(collectionView)
+
 		dispatchFetchCollectionPhotoAction(featuredCollection)
     }
 
-	override func viewDidDisappear(_ animated: Bool) {
-		store.unsubscribe(self)
-		super.viewDidDisappear(animated)
+	deinit {
+		unsubscribePhotoState()
 	}
+
+	// MARK: - UIgst configuration
 
 	private func configCollectionView(_ collectionView: CollectionView) {
 
 		let viewSource = ClosureViewSource { (imageView: UIImageView, data: UIImage, index: Int) in
 			imageView.contentMode = .scaleAspectFit
 			imageView.image = data
+			imageView.layer.cornerRadius = 6
+			imageView.clipsToBounds = true
 		}
 
 		let sizeSource = { (index: Int, data: UIImage, collectionSize: CGSize) -> CGSize in
@@ -61,47 +74,37 @@ class CollectionDetailsViewController: UIViewController {
 		collectionView.provider = provider
 		self.collectionProvider = provider
 	}
-
 }
 
 extension CollectionDetailsViewController: StoreSubscriber {
 
 	func newState(state: PhotoLoadingState) {
 
-//		if featuredCollection == nil {
-//			if case .selectedFeatureCollection(let id)? = state.interactionState.selectedFeatureCollection {
-//
-//				let featuredCollection = state.dataState.unsplashFeaturedCollections.first(where: { (collection) -> Bool in
-//					collection.id == id
-//				})
-//				self.featuredCollection = featuredCollection
-//				dispatchFetchCollectionPhotoAction(featuredCollection)
-//			}
-//			return
-//		}
-
-		if let collectionPhotoURLs = collectionPhotoURLs {
-
-			let loadedPhotos = collectionPhotoURLs.compactMap { (url) -> UIImage? in
-				if let image = state.loaded[url] {
-					return image
-				}
-				return nil
+		guard let loadedPhotos = collectionPhotoURLs?.compactMap({ (url) -> UIImage? in
+			if let image = state.loaded[url] {
+				return image
 			}
+			return nil
+		}) else { return }
 
-			DispatchQueue.main.async { [weak self] in
-				self?.collectionProvider?.dataSource = ArrayDataSource(data: loadedPhotos)
-				self?.collectionView.setNeedsReload()
-			}
+		DispatchQueue.main.async { [weak self] in
+			self?.collectionProvider?.dataSource = ArrayDataSource(data: loadedPhotos)
 		}
 	}
 
+	private func subscribePhotoStateSkippingRepeats() {
+		store.subscribe(self) { subscription in
+			subscription.select { $0.photoState }.skipRepeats()
+		}
+	}
+
+	private func unsubscribePhotoState() {
+		store.unsubscribe(self)
+	}
+
 	private func dispatchFetchCollectionPhotoAction(_ featuredCollection: UnsplashCollection?) {
-		if let smallPreviewPhotos = featuredCollection?.previewPhotos?.compactMap({ $0.urls?.small }) {
-			self.collectionPhotoURLs = smallPreviewPhotos
-			smallPreviewPhotos.forEach { (url) in
-				store.dispatch(fetchImage(withURL: url))
-			}
+		collectionPhotoURLs?.forEach { (url) in
+			store.dispatch(fetchImage(withURL: url))
 		}
 	}
 }

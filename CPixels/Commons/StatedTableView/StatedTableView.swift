@@ -15,7 +15,6 @@ final class StatedTableView: UIView {
 	@IBOutlet var tableView: UITableView! {
 		didSet {
 			tableView.separatorStyle = .none
-			tableView.contentInsetAdjustmentBehavior = .never
 		}
 	}
 

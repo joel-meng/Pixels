@@ -83,11 +83,14 @@ extension UnsplashCollectionTableViewCell: StoreSubscriber {
 		if let coverPhotoURL = self.coverPhotoURL, let image = state.loaded[coverPhotoURL] {
 			updateImage(image)
 		}
+		print("photo count: \(state.loaded.count)")
 	}
 
 	private func updateImage(_ image: UIImage) {
 		DispatchQueue.main.async { [weak self] in
-			self?.configTitleAndImageMode(withImage: image)
+			guard let self = self else { return }
+			self.configTitleAndImageMode(withImage: image)
+			store.unsubscribe(self)
 		}
 	}
 }

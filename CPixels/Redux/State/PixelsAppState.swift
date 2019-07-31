@@ -61,7 +61,7 @@ struct PhotoLoadingState: StateType, Equatable {
 
 	var loaded: [String: UIImage] = [:]
 	
-	var counter: [String: Int] = [:]
+//	var counter: [String: Int] = [:]
 }
 
 // MARK: - User interaction state

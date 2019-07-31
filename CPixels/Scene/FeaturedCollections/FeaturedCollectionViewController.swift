@@ -12,84 +12,79 @@ import ReSwiftThunk
 
 class FeaturedCollectionViewController: UIViewController {
 
+	// MARK: - IBOutlets
+
 	@IBOutlet var statedTableView: StatedTableView!
+
+	// MARK: - States
 
 	private var tableUpdater: ((StatedTableView.State<[UnsplashCollection]>) -> Void)?
 
-	var featuredCollections: [UnsplashCollection] = []
+	private var tableState: StatedTableView.State<[UnsplashCollection]>?
+
+	// MARK: - Lifecycle methods
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+
 		title = "Collections"
 
-		store.subscribe(self) { subscription in
-			subscription.select({ (state) in
-				return state.unsplashData.collectionScene
-			}).skipRepeats()
-		}
+		subscribeStoreUpdate()
 
-		tableUpdater = statedTableView.updater { [weak self] item in
+		configureStatedTableView()
+	}
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+
+		fetchCollectionsIfNeeded()
+	}
+
+	deinit {
+		unsubscribeStoreUpdate()
+	}
+
+	// MARK: - UI Configuration
+
+	private func configureStatedTableView() {
+		tableUpdater = statedTableView.tapAction { [weak self] item in
+			// FIXME: Should use coordinator here
 			let detailsViewController = CollectionDetailsViewController(nibName: "CollectionDetailsViewController",
 																		bundle: nil)
 			detailsViewController.featuredCollection = item
 			self?.show(detailsViewController, sender: self)
 		}
 	}
-
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		if featuredCollections.isEmpty {
-			store.dispatch(fetchCollectionThunk)
-		}
-	}
-
-	override func viewDidDisappear(_ animated: Bool) {
-		super.viewDidDisappear(animated)
-		store.unsubscribe(self)
-	}
-
 }
+
+// MARK: - StoreSubscriber
 
 extension FeaturedCollectionViewController: StoreSubscriber {
 
-	func newState(state: CollectionsSceneState) {
-
-		switch state.unsplashCollectionsState {
-
-		case .loading:
-			let state = StatedTableView.State<[UnsplashCollection]>.loading
-			tableUpdater?(state)
-		case .ready(let data):
-			let state = StatedTableView.State<[UnsplashCollection]>.data(data)
-			tableUpdater?(state)
-		case .error(let error):
-			let state = StatedTableView.State<[UnsplashCollection]>.error(error)
-			tableUpdater?(state)
-		case .outdated:
-			let state = StatedTableView.State<[UnsplashCollection]>.empty
-			tableUpdater?(state)
-		case .notStarted:
-			let state = StatedTableView.State<[UnsplashCollection]>.initial
-			tableUpdater?(state)
+	private func fetchCollectionsIfNeeded() {
+		switch tableState! {
+		case .initial:
+			store.dispatch(fetchCollectionThunk)
+		default:
+			break
 		}
 	}
-}
 
-fileprivate let fetchCollectionThunk = Thunk<PixelsAppState> { (dispatch, getState) in
+	private func unsubscribeStoreUpdate() {
+		store.unsubscribe(self)
+	}
 
-	guard let state = getState() else { return }
-
-
-	dispatch(RestFetch.fetchCollections(.loading))
-
-	UnsplashService.listCollections { (response) in
-		DispatchQueue.main.async {
-			switch response {
-			case .success(let result):
-				dispatch(RestFetch.fetchCollections(.ready(result)))
-			case .failure(let error):
-				dispatch(RestFetch.fetchCollections(.error("\(error)")))
-			}
+	private func subscribeStoreUpdate() {
+		store.subscribe(self) { subscription in
+			subscription.select({ (state) in
+				return state.unsplashData.collectionScene
+			}).skipRepeats()
 		}
-	}?.resume()
+	}
+
+	func newState(state: CollectionsSceneState) {
+		let state = StatedTableView.State<[UnsplashCollection]>.fromRestFetchState(state.unsplashCollectionsState)
+		self.tableState = state
+		tableUpdater?(state)
+	}
 }

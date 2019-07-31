@@ -46,7 +46,7 @@ final class StatedTableView: UIView {
 
 	// MARK: - TableView Updater
 
-	func updater<T>(bindAction: @escaping (T) -> Void) -> (_ state: StatedTableView.State<[T]>) -> Void {
+	func tapAction<T>(bindAction: @escaping (T) -> Void) -> (_ state: StatedTableView.State<[T]>) -> Void {
 		tableView.registerDefaultCell(for: T.self)
 		return customCellDataUpdater(for: self, bindAction: bindAction)
 	}
@@ -96,6 +96,22 @@ final class StatedTableView: UIView {
 		case empty
 		case data(T)
 		case error(String)
+
+		static func fromRestFetchState<D: Collection>(_ state: RestFetchingState<D>) -> State {
+
+			switch state {
+			case .loading:
+				return StatedTableView.State<T>.loading
+			case .ready(let data):
+				return StatedTableView.State<T>.data(data as! T)
+			case .error(let error):
+				return StatedTableView.State<T>.error(error)
+			case .outdated:
+				return StatedTableView.State<T>.empty
+			case .notStarted:
+				return StatedTableView.State<T>.initial
+			}
+		}
 	}
 }
 

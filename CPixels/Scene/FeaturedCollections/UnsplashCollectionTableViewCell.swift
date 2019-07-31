@@ -16,7 +16,6 @@ final class UnsplashCollectionTableViewCell: ReflexTableViewCell<UnsplashCollect
 	@IBOutlet var titleOnlyView: UIView!
 	@IBOutlet var titleOnlyLabel: UILabel!
 
-
 	@IBOutlet var imagedTitleView: UIView!
 	@IBOutlet var imageAndTitleLabel: UILabel!
 	@IBOutlet var imageTitleImageView: UIImageView!

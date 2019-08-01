@@ -8,26 +8,30 @@
 
 import UIKit
 import ReSwift
+import ReSwiftRouter
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-
+	var router: Router<PixelsAppState>?
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-		window = UIWindow(frame: UIScreen.main.bounds)
+		let window = UIWindow(frame: UIScreen.main.bounds)
+		window.rootViewController = UIViewController()
 
-		let featuredCollectionsViewController = FeaturedCollectionViewController(nibName: "FeaturedCollectionViewController",
-																				 bundle: nil)
+		let rootRoutable = RootRoutable(window: window)
 
-//		let featuredCollectionsViewController = CollectionDetailsViewController(nibName: "CollectionDetailsViewController",
-//																				bundle: nil)
+		router = Router(store: store, rootRoutable: rootRoutable) { state in
+			state.select { $0.navigationState }
+		}
 
-		window?.rootViewController = UINavigationController(rootViewController: featuredCollectionsViewController)
+		store.dispatch(SetRouteAction([mainViewRoute]))
 
-		window?.makeKeyAndVisible()
+		self.window = window
+		window.makeKeyAndVisible()
 
 		return true
 	}
@@ -54,6 +58,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 	}
 
-
 }
-

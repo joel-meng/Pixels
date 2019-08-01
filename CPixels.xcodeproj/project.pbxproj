@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB19C9DC22F320BD00616C26 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C9DB22F320BD00616C26 /* Router.swift */; };
+		DB19C9DE22F3377200616C26 /* UINavigationController+Completion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C9DD22F3377200616C26 /* UINavigationController+Completion.swift */; };
 		DB2E019422F10F9B008AFEE0 /* StatedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E019322F10F9B008AFEE0 /* StatedTableView.swift */; };
 		DB2E019622F10FAF008AFEE0 /* StatedTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB2E019522F10FAF008AFEE0 /* StatedTableView.xib */; };
 		DB2E019822F12CB9008AFEE0 /* ReflexTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E019722F12CB9008AFEE0 /* ReflexTableViewCell.swift */; };
@@ -70,6 +72,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB19C9DB22F320BD00616C26 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		DB19C9DD22F3377200616C26 /* UINavigationController+Completion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Completion.swift"; sourceTree = "<group>"; };
 		DB2E019322F10F9B008AFEE0 /* StatedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatedTableView.swift; sourceTree = "<group>"; };
 		DB2E019522F10FAF008AFEE0 /* StatedTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatedTableView.xib; sourceTree = "<group>"; };
 		DB2E019722F12CB9008AFEE0 /* ReflexTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflexTableViewCell.swift; sourceTree = "<group>"; };
@@ -144,6 +148,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB19C9DA22F320B100616C26 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				DB19C9DB22F320BD00616C26 /* Router.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		DB2E01A322F12EAE008AFEE0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +164,7 @@
 				DB2E019C22F12DA2008AFEE0 /* NibExtension+NamingConvention.swift */,
 				DB2E01A522F12EED008AFEE0 /* UIView+AutoLayout.swift */,
 				DB2E01A722F12F27008AFEE0 /* UIView+Nib.swift */,
+				DB19C9DD22F3377200616C26 /* UINavigationController+Completion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -190,6 +203,7 @@
 		DB591BCE22EB407F0093AE24 /* Redux */ = {
 			isa = PBXGroup;
 			children = (
+				DB19C9DA22F320B100616C26 /* Router */,
 				DB591BD822EB4AB90093AE24 /* Store */,
 				DB591BD522EB4A920093AE24 /* Reducer */,
 				DB591BD222EB412C0093AE24 /* Action */,
@@ -505,6 +519,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB19C9DC22F320BD00616C26 /* Router.swift in Sources */,
 				DB2E019822F12CB9008AFEE0 /* ReflexTableViewCell.swift in Sources */,
 				DB591BCC22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift in Sources */,
 				DB7B164522E88F7F0058428C /* Response.swift in Sources */,
@@ -514,6 +529,7 @@
 				DB7B164122E88F7F0058428C /* DateFormatter.swift in Sources */,
 				DB7B165B22E898BA0058428C /* CoverPhoto.swift in Sources */,
 				DB2E01A222F12DA2008AFEE0 /* UITableViewCellExtension+NamingConventions.swift in Sources */,
+				DB19C9DE22F3377200616C26 /* UINavigationController+Completion.swift in Sources */,
 				DB7B165A22E898BA0058428C /* Tag.swift in Sources */,
 				DB7B164D22E88F7F0058428C /* URLSessionDataTaskProtocol.swift in Sources */,
 				DB591BEE22EDE3700093AE24 /* CollectionDetailsViewController.swift in Sources */,

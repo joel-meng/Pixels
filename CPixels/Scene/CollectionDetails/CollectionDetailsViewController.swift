@@ -9,7 +9,7 @@
 import UIKit
 import CollectionKit
 import ReSwift
-import ReSwiftThunk
+import ReSwiftRouter
 
 final class CollectionDetailsViewController: UIViewController {
 
@@ -43,6 +43,12 @@ final class CollectionDetailsViewController: UIViewController {
 
 		dispatchFetchCollectionPhotoAction(featuredCollection)
     }
+
+	override func didMove(toParent parent: UIViewController?) {
+		if nil != parent {
+			store.dispatch(SetRouteAction([mainViewRoute]))
+		}
+	}
 
 	deinit {
 		unsubscribePhotoState()
@@ -78,10 +84,14 @@ final class CollectionDetailsViewController: UIViewController {
 
 extension CollectionDetailsViewController: StoreSubscriber {
 
-	func newState(state: PhotoLoadingState) {
+	func newState(state: (UnsplashCollection?, PhotoLoadingState)) {
+
+		if featuredCollection == nil {
+			featuredCollection = state.0
+		}
 
 		guard let loadedPhotos = collectionPhotoURLs?.compactMap({ (url) -> UIImage? in
-			if let image = state.loaded[url] {
+			if let image = state.1.loaded[url] {
 				return image
 			}
 			return nil
@@ -94,7 +104,13 @@ extension CollectionDetailsViewController: StoreSubscriber {
 
 	private func subscribePhotoStateSkippingRepeats() {
 		store.subscribe(self) { subscription in
-			subscription.select { $0.photoState }.skipRepeats()
+			subscription.select { state in
+				let selectedCollection: UnsplashCollection? = state.navigationState.getRouteSpecificState(state.navigationState.route)
+
+				let photoState = state.photoState
+
+				return (selectedCollection, photoState)
+			}
 		}
 	}
 

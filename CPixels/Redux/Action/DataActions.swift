@@ -23,6 +23,7 @@ enum AsyncLoadingState {
 enum RestFetch: Action {
 
 	case fetchCollections(RestFetchingState<[UnsplashCollection]>)
+	case fetchCollectionPhotos(RestFetchingState<[CoverPhoto]>)
 }
 
 // MARK: - Image Download Action

@@ -27,4 +27,14 @@ struct UnsplashService {
 						 expectedResultType: [UnsplashCollection].self,
 						 completion: completion)
 	}
+
+	static func listCollectionPhotos(collectionID: Int,
+									 completion: @escaping (_ response: Result<[CoverPhoto], Error>) -> Void) -> URLSessionDataTaskProtocol? {
+		let listCollectionPhotosRequest = unsplashGETRequest(path: "/collections/\(collectionID)/photos")
+
+		return Rest.load(request: listCollectionPhotosRequest,
+						 dateDecodingStrategy: nil,
+						 expectedResultType: [CoverPhoto].self,
+						 completion: completion)
+	}
 }

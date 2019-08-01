@@ -1,3 +1,4 @@
-github "ReSwift/ReSwift" "4.1.1"
-github "ReSwift/ReSwift-Thunk" "1.1.0"
+github "ReSwift/ReSwift" "5.0.0"
+github "ReSwift/ReSwift-Router" "0.7.1"
+github "ReSwift/ReSwift-Thunk" "f65b2506b9282ff66fd708e87f3516934ed2dca9"
 github "SoySauceLab/CollectionKit" "2.4.0"

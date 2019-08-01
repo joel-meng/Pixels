@@ -484,6 +484,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/ReSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReSwiftThunk.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CollectionKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReSwiftRouter.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -491,6 +492,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReSwiftThunk.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CollectionKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReSwiftRouter.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

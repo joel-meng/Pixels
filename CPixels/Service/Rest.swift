@@ -38,7 +38,7 @@ enum Rest {
                                  session: BlazingFastURLSession = URLSession.shared,
                                  dateDecodingStrategy: JSONDecoder.DateDecodingStrategy?,
                                  expectedResultType: T.Type,
-                                 completion: @escaping (_ json: T?, _ error: Error?) -> Void) -> URLSessionDataTaskProtocol? {
+                                 completion: @escaping (Result<T, Error>) -> Void) -> URLSessionDataTaskProtocol? {
         let decoder = JSONDecoder()
         if let dateDecodingStrategy = dateDecodingStrategy {
             decoder.dateDecodingStrategy = dateDecodingStrategy
@@ -50,40 +50,21 @@ enum Rest {
 								 session: BlazingFastURLSession = URLSession.shared,
 								 decoder: JSONDecoder = JSONDecoder(),
 								 expectedResultType: T.Type,
-								 completion: @escaping (_ json: T?, _ error: Error?) -> Void) -> URLSessionDataTaskProtocol? {
-        
-        guard let request = request.request() else {
-            return nil
-        }
-        
-        let task = session.dataTask(with: request) { data, response, err in
-            if let response = response as? HTTPURLResponse {
-                if response.wasSuccessful == false {
-                    var userInfo = [String: Any]()
-                    if let data = data, let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-                        userInfo["RestRequestErrorKey"] = json as Any?
-                    }
-                    let error = NSError(domain: "ERROR.DOMAIN", code: response.statusCode, userInfo: userInfo)
-                    completion(nil, error)
-                    return
-                }
-            }
-            
-            if let err = err {
-                completion(nil, err)
-            } else {
-                if let data = data {
-                    do {
-                        let decoded = try decoder.decode(T.self, from: data)
-                        completion(decoded, nil)
-                    } catch {
-                        completion(nil, error)
-                    }
-                }
-            }
-        }
-        task.resume()
-        return task
+								 completion: @escaping (Result<T, Error>) -> Void) -> URLSessionDataTaskProtocol? {
+
+		return load(request: request, session: session) { dataResult in
+			switch dataResult {
+			case .failure(let error):
+				completion(Result.failure(error))
+			case .success(let data):
+				do {
+					let decoded = try decoder.decode(T.self, from: data)
+					completion(Result.success(decoded))
+				} catch {
+					completion(Result.failure(error))
+				}
+			}
+		}
     }
 
 

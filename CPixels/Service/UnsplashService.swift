@@ -18,21 +18,23 @@ struct UnsplashService {
 		}
 	}
 
-	static func listCollections(completion: @escaping (_ response: Response<[UnsplashCollection]>) -> Void) -> URLSessionDataTaskProtocol? {
-		let listCollectionsRequest = unsplashGETRequest(path: "/collections/featured")
+	static func listCollections(completion: @escaping (_ response: Result<[UnsplashCollection], Error>) -> Void) -> URLSessionDataTaskProtocol? {
+		let listCollectionsRequest = unsplashGETRequest(path: "/collections")
 		let dateDecodingFormatter = JSONDecoder.DateDecodingStrategy.formatted(DateFormatter.rfc3339DateFormatter)
 
 		return Rest.load(request: listCollectionsRequest,
 						 dateDecodingStrategy: dateDecodingFormatter,
-						 expectedResultType: [UnsplashCollection].self) { repos, error in
+						 expectedResultType: [UnsplashCollection].self,
+						 completion: completion)
+	}
 
-							if let error = error {
-								completion(Response.failure(error))
-							}
+	static func listCollectionPhotos(collectionID: Int,
+									 completion: @escaping (_ response: Result<[CoverPhoto], Error>) -> Void) -> URLSessionDataTaskProtocol? {
+		let listCollectionPhotosRequest = unsplashGETRequest(path: "/collections/\(collectionID)/photos")
 
-							if let repos = repos {
-								completion(Response.success(repos))
-							}
-		}
+		return Rest.load(request: listCollectionPhotosRequest,
+						 dateDecodingStrategy: nil,
+						 expectedResultType: [CoverPhoto].self,
+						 completion: completion)
 	}
 }

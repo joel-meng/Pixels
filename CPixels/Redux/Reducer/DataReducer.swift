@@ -14,34 +14,23 @@ func dataReducer(action: Action, state: PixelsDataState?) -> PixelsDataState {
 
 	var state = state ?? PixelsDataState()
 
-	guard let action = action as? DataRequestAction else { return state}
+	guard let action = action as? RestFetch else { return state }
 
-	guard case let .success(data) = action.loadingState else { return state }
-
-	switch action.dataSet {
-	case .featuredCollection:
-		state.unsplashFeaturedCollections = data as! [UnsplashCollection]
-	}
+	state.collectionScene = collectionSceneReducer(action: action, state: state.collectionScene)
 
 	return state
 }
 
-func dataLoadingStateReducer(action: Action, state: LoadingTaskState?) -> LoadingTaskState {
+func collectionSceneReducer(action: Action, state: CollectionsSceneState?) -> CollectionsSceneState {
 
-	var state = state ?? LoadingTaskState()
+	var state = state ?? CollectionsSceneState()
 
-	guard let action = action as? DataRequestAction else { return state}
-
-	switch action.loadingState {
-	case .error:
-		state.tasks[action.dataSet] = .error
-	case .started:
-		state.tasks[action.dataSet] = .loading
-	case .success:
-		state.tasks[action.dataSet] = .ready
-	case .notStarted:
-		break
+	guard let action = action as? RestFetch,
+		case let .fetchCollections(restState) = action else {
+		return state
 	}
+
+	state.unsplashCollectionsState = restState
 
 	return state
 }
@@ -57,8 +46,24 @@ func photoLoadingStateReducer(action: Action, state: PhotoLoadingState?) -> Phot
 	switch imageFetchingAction.loadingState {
 	case .success(let image):
 		state.loaded[imageFetchingAction.imageURL] = image as? UIImage
+//		state.counter[imageFetchingAction.imageURL] = (state.counter[imageFetchingAction.imageURL] ?? 0) + 1
+
 	case .error, .started, .notStarted:
 		break
+	}
+
+	return state
+}
+
+func userInteractionStateReducer(action: Action, state: UserInteractionState?) -> UserInteractionState {
+
+	var state = state ?? UserInteractionState()
+
+	guard let action = action as? UserSelectionAction else { return state }
+
+	switch action {
+	case .selectedFeatureCollection:
+		state.selectedFeatureCollection = action
 	}
 
 	return state

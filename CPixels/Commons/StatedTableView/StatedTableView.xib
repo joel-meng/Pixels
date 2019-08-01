@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StatedTableView" customModule="CPixels" customModuleProvider="target">
+            <connections>
+                <outlet property="activityIndicator" destination="vFY-e8-9Pv" id="6cv-9b-QpF"/>
+                <outlet property="contentView" destination="BQS-3s-Cfa" id="vc7-wr-BYU"/>
+                <outlet property="messageLabel" destination="CTU-al-jDn" id="Kut-jt-uth"/>
+                <outlet property="tableView" destination="GtK-53-FYq" id="0xe-cY-LkD"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="BQS-3s-Cfa">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GtK-53-FYq">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTU-al-jDn">
+                    <rect key="frame" x="139" y="229.5" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="vFY-e8-9Pv">
+                    <rect key="frame" x="150" y="230" width="20" height="20"/>
+                </activityIndicatorView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vFY-e8-9Pv" firstAttribute="centerX" secondItem="BQS-3s-Cfa" secondAttribute="centerX" id="Sev-dZ-qPN"/>
+                <constraint firstAttribute="trailing" secondItem="GtK-53-FYq" secondAttribute="trailing" id="WnN-zu-5A9"/>
+                <constraint firstItem="GtK-53-FYq" firstAttribute="top" secondItem="BQS-3s-Cfa" secondAttribute="top" id="YYn-2Y-UHI"/>
+                <constraint firstItem="vFY-e8-9Pv" firstAttribute="centerY" secondItem="BQS-3s-Cfa" secondAttribute="centerY" id="a1P-7c-lrF"/>
+                <constraint firstItem="GtK-53-FYq" firstAttribute="leading" secondItem="BQS-3s-Cfa" secondAttribute="leading" id="c5G-aX-Jub"/>
+                <constraint firstItem="CTU-al-jDn" firstAttribute="centerX" secondItem="BQS-3s-Cfa" secondAttribute="centerX" id="cYL-rS-TQn"/>
+                <constraint firstItem="CTU-al-jDn" firstAttribute="centerY" secondItem="BQS-3s-Cfa" secondAttribute="centerY" id="jC8-vz-Ysu"/>
+                <constraint firstAttribute="bottom" secondItem="GtK-53-FYq" secondAttribute="bottom" id="rTI-Bq-eFv"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <point key="canvasLocation" x="-30" y="-276"/>
+        </view>
+    </objects>
+</document>

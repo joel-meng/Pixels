@@ -10,35 +10,64 @@ import Foundation
 import ReSwift
 import UIKit
 
+
+
 struct PixelsAppState: StateType, Equatable {
 
-	var dataState: PixelsDataState = PixelsDataState()
-
-	var loadingState: LoadingTaskState = LoadingTaskState()
+	var unsplashData: PixelsDataState = PixelsDataState()
 
 	var photoState: PhotoLoadingState = PhotoLoadingState()
+
+	var interactionState: UserInteractionState = UserInteractionState()
 }
 
 struct PixelsDataState: StateType, Equatable {
 
-	var unsplashFeaturedCollections: [UnsplashCollection] = []
+	var collectionScene: CollectionsSceneState = CollectionsSceneState()
 }
 
-struct LoadingTaskState: StateType, Equatable {
+struct CollectionsSceneState: StateType, Equatable {
 
-	var tasks: [PixelsData: DataReadyState] = [:]
+	var unsplashCollectionsState: RestFetchingState = RestFetchingState<[UnsplashCollection]>.notStarted
 }
 
-struct PhotoLoadingState: StateType, Equatable {
 
-	var loaded: [String: UIImage] = [:]
+
+// MARK: - Rest Data
+
+enum RestFetchingState<Data>: Equatable where Data: Equatable {
+	case notStarted
+	case loading
+	case ready(Data)
+	case outdated
+	case error(String)
 }
+
+// MARK: - Rest Data State
 
 enum DataReadyState {
-	
+
 	case initilized
 	case loading
 	case ready
 	case outdated
 	case error
 }
+
+
+// MARK: - Loaded photos state
+
+struct PhotoLoadingState: StateType, Equatable {
+
+	var loaded: [String: UIImage] = [:]
+	
+//	var counter: [String: Int] = [:]
+}
+
+// MARK: - User interaction state
+
+struct UserInteractionState: StateType, Equatable {
+
+	var selectedFeatureCollection: UserSelectionAction?
+}
+

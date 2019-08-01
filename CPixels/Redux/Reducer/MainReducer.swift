@@ -12,8 +12,8 @@ import ReSwift
 func reducer(action: Action, state: PixelsAppState?) -> PixelsAppState {
 	
 	return PixelsAppState(
-		dataState: dataReducer(action: action, state: state?.dataState),
-		loadingState: dataLoadingStateReducer(action: action, state: state?.loadingState),
-		photoState: photoLoadingStateReducer(action: action, state: state?.photoState)
+		unsplashData: dataReducer(action: action, state: state?.unsplashData),
+		photoState: photoLoadingStateReducer(action: action, state: state?.photoState),
+		interactionState: userInteractionStateReducer(action: action, state: state?.interactionState)
 	)
 }

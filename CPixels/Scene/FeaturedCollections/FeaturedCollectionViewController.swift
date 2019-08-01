@@ -12,86 +12,79 @@ import ReSwiftThunk
 
 class FeaturedCollectionViewController: UIViewController {
 
-	@IBOutlet var tableView: UITableView! {
-		didSet {
-			self.tableView.dataSource = self
-			self.tableView.delegate = self
-			tableView.contentInsetAdjustmentBehavior = .never
+	// MARK: - IBOutlets
 
-			let nib = UINib(nibName: "FeaturedCollectionTableViewCell", bundle: nil)
-			tableView.register(nib, forCellReuseIdentifier: "FeaturedCollectionTableViewCell")
-		}
-	}
+	@IBOutlet var statedTableView: StatedTableView!
 
-	var featuredCollections: [UnsplashCollection] = []
+	// MARK: - States
+
+	private var tableUpdater: ((StatedTableView.State<[UnsplashCollection]>) -> Void)?
+
+	private var tableState: StatedTableView.State<[UnsplashCollection]>?
+
+	// MARK: - Lifecycle methods
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		title = "Featured"
 
-		store.subscribe(self) { subscription in
-			subscription.skip(when: ==)
-		}
+		title = "Collections"
+
+		subscribeStoreUpdate()
+
+		configureStatedTableView()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		store.dispatch(fetchFeaturedCollectionThunk)
+
+		fetchCollectionsIfNeeded()
 	}
 
-	override func viewDidDisappear(_ animated: Bool) {
-		super.viewDidDisappear(animated)
-		store.unsubscribe(self)
+	deinit {
+		unsubscribeStoreUpdate()
+	}
+
+	// MARK: - UI Configuration
+
+	private func configureStatedTableView() {
+		tableUpdater = statedTableView.tapAction { [weak self] item in
+			// FIXME: Should use coordinator here
+			let detailsViewController = CollectionDetailsViewController(nibName: "CollectionDetailsViewController",
+																		bundle: nil)
+			detailsViewController.featuredCollection = item
+			self?.show(detailsViewController, sender: self)
+		}
 	}
 }
+
+// MARK: - StoreSubscriber
 
 extension FeaturedCollectionViewController: StoreSubscriber {
 
-	func newState(state: PixelsAppState) {
-		if case .loading? = state.loadingState.tasks[.featuredCollection] {
-			return
+	private func fetchCollectionsIfNeeded() {
+		switch tableState! {
+		case .initial:
+			store.dispatch(fetchCollectionThunk)
+		default:
+			break
 		}
-		if case .ready? = state.loadingState.tasks[.featuredCollection] {
-			self.featuredCollections =  state.dataState.unsplashFeaturedCollections
-			tableView.reloadData()
+	}
+
+	private func unsubscribeStoreUpdate() {
+		store.unsubscribe(self)
+	}
+
+	private func subscribeStoreUpdate() {
+		store.subscribe(self) { subscription in
+			subscription.select({ (state) in
+				return state.unsplashData.collectionScene
+			}).skipRepeats()
 		}
 	}
-}
 
-extension FeaturedCollectionViewController: UITableViewDataSource, UITableViewDelegate {
-
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return featuredCollections.count
+	func newState(state: CollectionsSceneState) {
+		let state = StatedTableView.State<[UnsplashCollection]>.fromRestFetchState(state.unsplashCollectionsState)
+		self.tableState = state
+		tableUpdater?(state)
 	}
-
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "FeaturedCollectionTableViewCell",
-												 for: indexPath) as! FeatureCollectionTableViewCell
-		cell.configure(with: featuredCollections[indexPath.row])
-		return cell
-	}
-
-	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 160
-	}
-}
-
-fileprivate let fetchFeaturedCollectionThunk = Thunk<PixelsAppState> { (dispatch, getState) in
-
-	guard let state = getState() else { return }
-
-	dispatch(DataRequestAction(dataSet: .featuredCollection, loadingState: .started))
-
-	UnsplashService.listCollections { (response) in
-		DispatchQueue.main.async {
-			switch response {
-			case .success(let result):
-				dispatch(DataRequestAction(dataSet: .featuredCollection,
-										   loadingState: .success(result)))
-			case .failure(let error):
-				dispatch(DataRequestAction(dataSet: .featuredCollection,
-										   loadingState: .error(error)))
-			}
-		}
-	}?.resume()
 }

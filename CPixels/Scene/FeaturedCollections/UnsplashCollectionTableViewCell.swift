@@ -11,11 +11,10 @@ import UIKit
 import ReSwift
 import ReSwiftThunk
 
-final class FeatureCollectionTableViewCell: UITableViewCell {
+final class UnsplashCollectionTableViewCell: ReflexTableViewCell<UnsplashCollection> {
 
 	@IBOutlet var titleOnlyView: UIView!
 	@IBOutlet var titleOnlyLabel: UILabel!
-
 
 	@IBOutlet var imagedTitleView: UIView!
 	@IBOutlet var imageAndTitleLabel: UILabel!
@@ -28,14 +27,15 @@ final class FeatureCollectionTableViewCell: UITableViewCell {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		selectionStyle = .none
+		imagedTitleView.layer.cornerRadius = 6
+		imagedTitleView.clipsToBounds = true
 	}
 
-	func configure(with model: UnsplashCollection) {
+	override func config(_ item: UnsplashCollection) {
 
-		configTitleOnlyMode(withTitle: model.title)
+		configTitleOnlyMode(withTitle: item.title)
 
-
-		if let coverPhotoURL = model.coverPhoto?.urls?.regular {
+		if let coverPhotoURL = item.coverPhoto?.urls?.small {
 
 			self.coverPhotoURL = coverPhotoURL
 
@@ -77,37 +77,20 @@ final class FeatureCollectionTableViewCell: UITableViewCell {
 	}
 }
 
-extension FeatureCollectionTableViewCell: StoreSubscriber {
+extension UnsplashCollectionTableViewCell: StoreSubscriber {
 
 	func newState(state: PhotoLoadingState) {
 		if let coverPhotoURL = self.coverPhotoURL, let image = state.loaded[coverPhotoURL] {
 			updateImage(image)
 		}
+		print("photo count: \(state.loaded.count)")
 	}
 
 	private func updateImage(_ image: UIImage) {
 		DispatchQueue.main.async { [weak self] in
-			self?.configTitleAndImageMode(withImage: image)
+			guard let self = self else { return }
+			self.configTitleAndImageMode(withImage: image)
+			store.unsubscribe(self)
 		}
-	}
-}
-
-private func fetchImage(withURL imageUrl: String) -> Thunk<PixelsAppState> {
-
-	return Thunk<PixelsAppState> { (dispatch, getState) in
-
-		guard let state = getState() else { return }
-
-		if let alreadyLoadedImage = state.photoState.loaded[imageUrl] {
-			dispatch(ImageFetchAction(imageURL: imageUrl, loadingState: .success(alreadyLoadedImage)))
-			return
-		}
-
-		dispatch(ImageFetchAction(imageURL: imageUrl, loadingState: .started))
-
-		UnsplashService.loadImage(withURL: imageUrl, completion: { (result) in
-			guard let loadedImage = try? result.get() else { return }
-			dispatch(ImageFetchAction(imageURL: imageUrl, loadingState: .success(loadedImage)))
-		})?.resume()
 	}
 }

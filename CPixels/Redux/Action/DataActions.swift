@@ -9,11 +9,7 @@
 import Foundation
 import ReSwift
 
-protocol DataAction: Action {
-
-	var dataSet: PixelsData { get }
-
-	var loadingState: AsyncLoadingState { get }
+protocol RestAction: Action {
 }
 
 enum AsyncLoadingState {
@@ -24,16 +20,10 @@ enum AsyncLoadingState {
 	case error(Error)
 }
 
-enum PixelsData {
+enum RestFetch: Action {
 
-	case featuredCollection
-}
-
-struct DataRequestAction: DataAction {
-
-	let dataSet: PixelsData
-	
-	let loadingState: AsyncLoadingState
+	case fetchCollections(RestFetchingState<[UnsplashCollection]>)
+	case fetchCollectionPhotos(RestFetchingState<[CoverPhoto]>)
 }
 
 // MARK: - Image Download Action
@@ -46,3 +36,15 @@ struct ImageFetchAction: DownloadAction {
 
 	let loadingState: AsyncLoadingState
 }
+
+// MARK: - User Interaction Action
+
+protocol UserInteractionAction: Action {}
+
+enum UserSelectionAction: UserInteractionAction, Equatable {
+
+	case selectedFeatureCollection(Int)
+}
+
+
+

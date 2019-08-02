@@ -8,7 +8,7 @@
 
 import UIKit
 import ReSwift
-import ReSwiftThunk
+import ReSwiftRouter
 
 class FeaturedCollectionViewController: UIViewController {
 
@@ -47,12 +47,13 @@ class FeaturedCollectionViewController: UIViewController {
 	// MARK: - UI Configuration
 
 	private func configureStatedTableView() {
-		tableUpdater = statedTableView.tapAction { [weak self] item in
-			// FIXME: Should use coordinator here
-			let detailsViewController = CollectionDetailsViewController(nibName: "CollectionDetailsViewController",
-																		bundle: nil)
-			detailsViewController.featuredCollection = item
-			self?.show(detailsViewController, sender: self)
+		tableUpdater = statedTableView.tapAction { item in
+			let route = [mainViewRoute, photosViewRoute]
+			let dataAction = SetRouteSpecificData(route: route, data: item)
+			let routeAction = SetRouteAction(route, animated: true)
+
+			store.dispatch(dataAction)
+			store.dispatch(routeAction)
 		}
 	}
 }

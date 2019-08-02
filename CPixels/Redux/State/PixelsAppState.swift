@@ -8,17 +8,20 @@
 
 import Foundation
 import ReSwift
+import ReSwiftRouter
 import UIKit
 
 
 
-struct PixelsAppState: StateType, Equatable {
+struct PixelsAppState: StateType {
 
 	var unsplashData: PixelsDataState = PixelsDataState()
 
 	var photoState: PhotoLoadingState = PhotoLoadingState()
 
 	var interactionState: UserInteractionState = UserInteractionState()
+
+	var navigationState: NavigationState = NavigationState()
 }
 
 struct PixelsDataState: StateType, Equatable {
@@ -30,8 +33,6 @@ struct CollectionsSceneState: StateType, Equatable {
 
 	var unsplashCollectionsState: RestFetchingState = RestFetchingState<[UnsplashCollection]>.notStarted
 }
-
-
 
 // MARK: - Rest Data
 

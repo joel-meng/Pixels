@@ -11,7 +11,7 @@ import ReSwift
 import ReSwiftThunk
 
 
-let thunkMiddleware: Middleware<PixelsAppState> = createThunksMiddleware()
+let thunkMiddleware: Middleware<PixelsAppState> = createThunkMiddleware()
 
 let loggingMiddleware: Middleware<Any> = { dispatch, getState in
 	return { next in

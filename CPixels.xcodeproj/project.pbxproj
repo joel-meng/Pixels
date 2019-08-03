@@ -21,7 +21,7 @@
 		DB2E01AA22F17B82008AFEE0 /* FetchImageThunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E01A922F17B82008AFEE0 /* FetchImageThunk.swift */; };
 		DB2E01AC22F19253008AFEE0 /* FetchCollectionsThunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E01AB22F19253008AFEE0 /* FetchCollectionsThunk.swift */; };
 		DB591BCA22EB37930093AE24 /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BC922EB37930093AE24 /* Reader.swift */; };
-		DB591BCC22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BCB22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift */; };
+		DB591BCC22EB3FAB0093AE24 /* UnsplashRequestCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BCB22EB3FAB0093AE24 /* UnsplashRequestCreator.swift */; };
 		DB591BD022EB40980093AE24 /* PixelsAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BCF22EB40980093AE24 /* PixelsAppState.swift */; };
 		DB591BD722EB4A9F0093AE24 /* MainReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BD622EB4A9F0093AE24 /* MainReducer.swift */; };
 		DB591BDA22EB4AC60093AE24 /* PixelsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BD922EB4AC60093AE24 /* PixelsStore.swift */; };
@@ -59,6 +59,9 @@
 		DB7B165F22E89B020058428C /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165E22E89B020058428C /* Link.swift */; };
 		DB7B166122E89E5A0058428C /* RestRequestAuthorizationDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B166022E89E5A0058428C /* RestRequestAuthorizationDecorator.swift */; };
 		DB7F2D0822EF103C001BBA11 /* MyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F2D0722EF103C001BBA11 /* MyCollectionView.swift */; };
+		DBEE443522F59FCB00E8BD4C /* StatefulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEE443422F59FCB00E8BD4C /* StatefulView.swift */; };
+		DBEE443722F5B12400E8BD4C /* CollectionDetailsStoreSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEE443622F5B12400E8BD4C /* CollectionDetailsStoreSubscriber.swift */; };
+		DBEE443922F5E2D900E8BD4C /* Fn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEE443822F5E2D900E8BD4C /* Fn.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,7 +89,7 @@
 		DB2E01A922F17B82008AFEE0 /* FetchImageThunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageThunk.swift; sourceTree = "<group>"; };
 		DB2E01AB22F19253008AFEE0 /* FetchCollectionsThunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCollectionsThunk.swift; sourceTree = "<group>"; };
 		DB591BC922EB37930093AE24 /* Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader.swift; sourceTree = "<group>"; };
-		DB591BCB22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnsplashRequestCreator'.swift"; sourceTree = "<group>"; };
+		DB591BCB22EB3FAB0093AE24 /* UnsplashRequestCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashRequestCreator.swift; sourceTree = "<group>"; };
 		DB591BCF22EB40980093AE24 /* PixelsAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelsAppState.swift; sourceTree = "<group>"; };
 		DB591BD622EB4A9F0093AE24 /* MainReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainReducer.swift; sourceTree = "<group>"; };
 		DB591BD922EB4AC60093AE24 /* PixelsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelsStore.swift; sourceTree = "<group>"; };
@@ -128,6 +131,9 @@
 		DB7B165E22E89B020058428C /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		DB7B166022E89E5A0058428C /* RestRequestAuthorizationDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestRequestAuthorizationDecorator.swift; sourceTree = "<group>"; };
 		DB7F2D0722EF103C001BBA11 /* MyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionView.swift; sourceTree = "<group>"; };
+		DBEE443422F59FCB00E8BD4C /* StatefulView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulView.swift; sourceTree = "<group>"; };
+		DBEE443622F5B12400E8BD4C /* CollectionDetailsStoreSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailsStoreSubscriber.swift; sourceTree = "<group>"; };
+		DBEE443822F5E2D900E8BD4C /* Fn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fn.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +171,8 @@
 				DB2E01A522F12EED008AFEE0 /* UIView+AutoLayout.swift */,
 				DB2E01A722F12F27008AFEE0 /* UIView+Nib.swift */,
 				DB19C9DD22F3377200616C26 /* UINavigationController+Completion.swift */,
+				DBEE443422F59FCB00E8BD4C /* StatefulView.swift */,
+				DBEE443822F5E2D900E8BD4C /* Fn.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -262,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				DB591BEC22EDE3700093AE24 /* CollectionDetailsViewController.swift */,
+				DBEE443622F5B12400E8BD4C /* CollectionDetailsStoreSubscriber.swift */,
 				DB591BED22EDE3700093AE24 /* CollectionDetailsViewController.xib */,
 			);
 			path = CollectionDetails;
@@ -361,7 +370,7 @@
 			children = (
 				DB7B163822E88F7F0058428C /* Decorator */,
 				DB7B163B22E88F7F0058428C /* UnsplashRequest.swift */,
-				DB591BCB22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift */,
+				DB591BCB22EB3FAB0093AE24 /* UnsplashRequestCreator.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -521,7 +530,7 @@
 			files = (
 				DB19C9DC22F320BD00616C26 /* Router.swift in Sources */,
 				DB2E019822F12CB9008AFEE0 /* ReflexTableViewCell.swift in Sources */,
-				DB591BCC22EB3FAB0093AE24 /* UnsplashRequestCreator'.swift in Sources */,
+				DB591BCC22EB3FAB0093AE24 /* UnsplashRequestCreator.swift in Sources */,
 				DB7B164522E88F7F0058428C /* Response.swift in Sources */,
 				DB2E01A122F12DA2008AFEE0 /* StringExtension+TypeName.swift in Sources */,
 				DB591BDA22EB4AC60093AE24 /* PixelsStore.swift in Sources */,
@@ -535,12 +544,14 @@
 				DB591BEE22EDE3700093AE24 /* CollectionDetailsViewController.swift in Sources */,
 				DB2E01A622F12EED008AFEE0 /* UIView+AutoLayout.swift in Sources */,
 				DB7B165D22E898BA0058428C /* UnsplashCollection.swift in Sources */,
+				DBEE443522F59FCB00E8BD4C /* StatefulView.swift in Sources */,
 				DB7B164022E88F7F0058428C /* HTTPURLResponse+Status.swift in Sources */,
 				DB2E01AC22F19253008AFEE0 /* FetchCollectionsThunk.swift in Sources */,
 				DB591BCA22EB37930093AE24 /* Reader.swift in Sources */,
 				DB7B165622E898BA0058428C /* ProfileImage.swift in Sources */,
 				DB591BD722EB4A9F0093AE24 /* MainReducer.swift in Sources */,
 				DB591BDC22EB4AE60093AE24 /* DataReducer.swift in Sources */,
+				DBEE443922F5E2D900E8BD4C /* Fn.swift in Sources */,
 				DB591BD022EB40980093AE24 /* PixelsAppState.swift in Sources */,
 				DB2E01A822F12F27008AFEE0 /* UIView+Nib.swift in Sources */,
 				DB2E01A022F12DA2008AFEE0 /* NibExtension+NamingConvention.swift in Sources */,
@@ -548,6 +559,7 @@
 				DB7B164422E88F7F0058428C /* HTTPMethod.swift in Sources */,
 				DB7B164A22E88F7F0058428C /* UnsplashRequest.swift in Sources */,
 				DB2E01AA22F17B82008AFEE0 /* FetchImageThunk.swift in Sources */,
+				DBEE443722F5B12400E8BD4C /* CollectionDetailsStoreSubscriber.swift in Sources */,
 				DB7B165722E898BA0058428C /* Url.swift in Sources */,
 				DB7B166122E89E5A0058428C /* RestRequestAuthorizationDecorator.swift in Sources */,
 				DB2E019422F10F9B008AFEE0 /* StatedTableView.swift in Sources */,

@@ -15,46 +15,65 @@ final class CollectionDetailsViewController: UIViewController {
 
 	// MARK: - IBOutlets
 
-	@IBOutlet var collectionView: CollectionView!
-
-	// MARK: - Selections
-
-	var featuredCollection: UnsplashCollection? {
+	@IBOutlet var collectionView: CollectionView! {
 		didSet {
-			collectionPhotoURLs = featuredCollection?.previewPhotos?.compactMap({ $0.urls?.small })
+			collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 		}
 	}
 
-	private var collectionPhotoURLs: [String]?
+	@IBOutlet var messageLabel: UILabel!
+	
+	@IBOutlet var activityIndicator: UIActivityIndicatorView!
 
 	// MARK: - States
 
+	private var screenState: ViewState<CollectionDetailsViewController> = .uninitialized {
+		didSet {
+			screenState.update(view: self)
+		}
+	}
+
+	// MARK: - CollectionView Provider
+
 	private var collectionProvider: BasicProvider<UIImage, UIImageView>?
+
+	// MARK: - Store subscriber
+
+	private var storeSubscriber: CollectionDetailsStoreSubscriber?
 
 	// MARK: - Lifecycles
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-		title = featuredCollection?.title ?? "Previews"
-
-		subscribePhotoStateSkippingRepeats()
 
 		configCollectionView(collectionView)
 
-		dispatchFetchCollectionPhotoAction(featuredCollection)
+		storeSubscriber = CollectionDetailsStoreSubscriber(
+			stateUpdater: { [weak self] (state, images) in
+				self?.screenState = state
+				if let images = images {
+					self?.collectionProvider?.dataSource = ArrayDataSource(data: images)
+				}
+			},
+			titleUpdater: { [weak self] title in
+				self?.title = title ?? "Previews"
+			}
+		)
+
+		storeSubscriber?.subscribePhotoStateSkippingRepeats()
     }
 
 	override func didMove(toParent parent: UIViewController?) {
-		if nil != parent {
+		if nil == parent {
 			store.dispatch(SetRouteAction([mainViewRoute]))
 		}
 	}
 
 	deinit {
-		unsubscribePhotoState()
+		storeSubscriber?.unsubscribePhotoState()
 	}
 
-	// MARK: - UIgst configuration
+	// MARK: - UI configuration
 
 	private func configCollectionView(_ collectionView: CollectionView) {
 
@@ -65,62 +84,23 @@ final class CollectionDetailsViewController: UIViewController {
 			imageView.clipsToBounds = true
 		}
 
-		let sizeSource = { (index: Int, data: UIImage, collectionSize: CGSize) -> CGSize in
-			let ratio = data.size.width / data.size.height
-			let cellWidth = collectionSize.width
-			let cellHeight = cellWidth / ratio
-			return CGSize(width: cellWidth, height: cellHeight)
-		}
-
+		let visibleFrameInsets = UIEdgeInsets(top: 0, left: -100, bottom: 0, right: -100)
 		let provider = BasicProvider(dataSource: [UIImage](),
 									 viewSource: viewSource,
-									 sizeSource: sizeSource)
+									 sizeSource: UIImageSizeSource(),
+									 layout: WaterfallLayout(columns: 2, spacing: 10).insetVisibleFrame(by: visibleFrameInsets),
+									 animator: ScaleAnimator())
 
-		provider.layout = WaterfallLayout(columns: 2, spacing: 5)
 		collectionView.provider = provider
-		self.collectionProvider = provider
+		collectionProvider = provider
 	}
 }
 
-extension CollectionDetailsViewController: StoreSubscriber {
+// MARK: - StatefulView
 
-	func newState(state: (UnsplashCollection?, PhotoLoadingState)) {
+extension CollectionDetailsViewController: StatefulView {
 
-		if featuredCollection == nil {
-			featuredCollection = state.0
-		}
-
-		guard let loadedPhotos = collectionPhotoURLs?.compactMap({ (url) -> UIImage? in
-			if let image = state.1.loaded[url] {
-				return image
-			}
-			return nil
-		}) else { return }
-
-		DispatchQueue.main.async { [weak self] in
-			self?.collectionProvider?.dataSource = ArrayDataSource(data: loadedPhotos)
-		}
-	}
-
-	private func subscribePhotoStateSkippingRepeats() {
-		store.subscribe(self) { subscription in
-			subscription.select { state in
-				let selectedCollection: UnsplashCollection? = state.navigationState.getRouteSpecificState(state.navigationState.route)
-
-				let photoState = state.photoState
-
-				return (selectedCollection, photoState)
-			}
-		}
-	}
-
-	private func unsubscribePhotoState() {
-		store.unsubscribe(self)
-	}
-
-	private func dispatchFetchCollectionPhotoAction(_ featuredCollection: UnsplashCollection?) {
-		collectionPhotoURLs?.forEach { (url) in
-			store.dispatch(fetchImage(withURL: url))
-		}
+	var mainView: UIView! {
+		return collectionView
 	}
 }

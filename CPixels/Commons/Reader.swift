@@ -40,6 +40,7 @@ precedencegroup RunesMonadicPrecedenceLeft {
 	lowerThan: LogicalDisjunctionPrecedence
 	higherThan: AssignmentPrecedence
 }
+
 func >>=<E, A, B>(a: Reader<E, A>, f: @escaping (A) -> B) -> Reader<E, B> {
 	return a.map(f)
 }

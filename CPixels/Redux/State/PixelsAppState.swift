@@ -19,19 +19,24 @@ struct PixelsAppState: StateType {
 
 	var photoState: PhotoLoadingState = PhotoLoadingState()
 
-	var interactionState: UserInteractionState = UserInteractionState()
-
 	var navigationState: NavigationState = NavigationState()
 }
 
 struct PixelsDataState: StateType, Equatable {
 
 	var collectionScene: CollectionsSceneState = CollectionsSceneState()
+
+	var collectionPhotosScene: CollectionPhotosSceneState = CollectionPhotosSceneState()
 }
 
 struct CollectionsSceneState: StateType, Equatable {
 
-	var unsplashCollectionsState: RestFetchingState = RestFetchingState<[UnsplashCollection]>.notStarted
+	var unsplashCollections: RestFetchingState = RestFetchingState<[UnsplashCollection]>.notStarted
+}
+
+struct CollectionPhotosSceneState: StateType, Equatable {
+
+	var collectionPhotos: RestFetchingState<[CoverPhoto]> =  RestFetchingState.notStarted
 }
 
 // MARK: - Rest Data
@@ -61,14 +66,8 @@ enum DataReadyState {
 struct PhotoLoadingState: StateType, Equatable {
 
 	var loaded: [String: UIImage] = [:]
+
+	var loading: [String] = []
 	
 //	var counter: [String: Int] = [:]
 }
-
-// MARK: - User interaction state
-
-struct UserInteractionState: StateType, Equatable {
-
-	var selectedFeatureCollection: UserSelectionAction?
-}
-

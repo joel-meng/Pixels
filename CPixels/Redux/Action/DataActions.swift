@@ -36,15 +36,3 @@ struct ImageFetchAction: DownloadAction {
 
 	let loadingState: AsyncLoadingState
 }
-
-// MARK: - User Interaction Action
-
-protocol UserInteractionAction: Action {}
-
-enum UserSelectionAction: UserInteractionAction, Equatable {
-
-	case selectedFeatureCollection(Int)
-}
-
-
-

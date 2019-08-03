@@ -86,7 +86,7 @@ extension CollectionDetailsViewController: StoreSubscriber {
 
 		if featuredCollection == nil, let selectedCollection = state.selectedCollection {
 			featuredCollection = state.selectedCollection
-			store.dispatch(fetchCollectionPhotos(collectionID: selectedCollection.id!))
+			store.dispatch(fetchCollectionPhotos(collectionID: selectedCollection.id!, photosPerPage: 20))
 			return
 		}
 

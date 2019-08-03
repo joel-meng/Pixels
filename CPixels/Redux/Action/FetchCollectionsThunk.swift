@@ -27,13 +27,16 @@ let fetchCollection = Thunk<PixelsAppState> { (dispatch, getState) in
 	}?.resume()
 }
 
-func fetchCollectionPhotos(collectionID: Int) -> Thunk<PixelsAppState> {
+func fetchCollectionPhotos(collectionID: Int, photosPerPage: Int) -> Thunk<PixelsAppState> {
 
 	let fetchCollectionPhotos = Thunk<PixelsAppState> { (dispatch, getState) in
 
 		dispatch(RestFetch.fetchCollectionPhotos(.loading))
 
-		UnsplashService.listCollectionPhotos(collectionID: collectionID, completion: { (result) in
+		UnsplashService.listCollectionPhotos(collectionID: collectionID,
+											 photosPerPage: photosPerPage,
+											 pageNumber: 1,
+											 completion: { (result) in
 			DispatchQueue.main.async {
 				switch result {
 				case .success(let result):

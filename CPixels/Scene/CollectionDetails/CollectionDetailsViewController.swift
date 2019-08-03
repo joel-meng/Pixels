@@ -15,7 +15,11 @@ final class CollectionDetailsViewController: UIViewController {
 
 	// MARK: - IBOutlets
 
-	@IBOutlet var collectionView: CollectionView!
+	@IBOutlet var collectionView: CollectionView! {
+		didSet {
+			collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+		}
+	}
 
 	@IBOutlet var messageLabel: UILabel!
 	
@@ -80,20 +84,15 @@ final class CollectionDetailsViewController: UIViewController {
 			imageView.clipsToBounds = true
 		}
 
-		let sizeSource = { (index: Int, data: UIImage, collectionSize: CGSize) -> CGSize in
-			let ratio = data.size.width / data.size.height
-			let cellWidth = collectionSize.width
-			let cellHeight = cellWidth / ratio
-			return CGSize(width: cellWidth, height: cellHeight)
-		}
-
+		let visibleFrameInsets = UIEdgeInsets(top: 0, left: -100, bottom: 0, right: -100)
 		let provider = BasicProvider(dataSource: [UIImage](),
 									 viewSource: viewSource,
-									 sizeSource: sizeSource)
+									 sizeSource: UIImageSizeSource(),
+									 layout: WaterfallLayout(columns: 2, spacing: 10).insetVisibleFrame(by: visibleFrameInsets),
+									 animator: ScaleAnimator())
 
-		provider.layout = WaterfallLayout(columns: 2, spacing: 5)
 		collectionView.provider = provider
-		self.collectionProvider = provider
+		collectionProvider = provider
 	}
 }
 

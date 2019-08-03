@@ -19,13 +19,9 @@ final class CollectionDetailsViewController: UIViewController {
 
 	// MARK: - Selections
 
-	var featuredCollection: UnsplashCollection? {
-		didSet {
-			collectionPhotoURLs = featuredCollection?.previewPhotos?.compactMap({ $0.urls?.small })
-		}
-	}
+	var featuredCollection: UnsplashCollection?
 
-	private var collectionPhotoURLs: [String]?
+	private var photoURLs: [String]?
 
 	// MARK: - States
 
@@ -35,17 +31,16 @@ final class CollectionDetailsViewController: UIViewController {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
+
 		title = featuredCollection?.title ?? "Previews"
 
 		subscribePhotoStateSkippingRepeats()
 
 		configCollectionView(collectionView)
-
-		dispatchFetchCollectionPhotoAction(featuredCollection)
     }
 
 	override func didMove(toParent parent: UIViewController?) {
-		if nil != parent {
+		if nil == parent {
 			store.dispatch(SetRouteAction([mainViewRoute]))
 		}
 	}
@@ -54,7 +49,7 @@ final class CollectionDetailsViewController: UIViewController {
 		unsubscribePhotoState()
 	}
 
-	// MARK: - UIgst configuration
+	// MARK: - UI configuration
 
 	private func configCollectionView(_ collectionView: CollectionView) {
 
@@ -84,43 +79,55 @@ final class CollectionDetailsViewController: UIViewController {
 
 extension CollectionDetailsViewController: StoreSubscriber {
 
-	func newState(state: (UnsplashCollection?, PhotoLoadingState)) {
+	func newState(
+		state: (selectedCollection: UnsplashCollection?,
+				sceneState: CollectionPhotosSceneState,
+				photoState: PhotoLoadingState)
+		) {
 
-		if featuredCollection == nil {
-			featuredCollection = state.0
+		if featuredCollection == nil, let selectedCollection = state.selectedCollection {
+			featuredCollection = state.selectedCollection
+			store.dispatch(fetchCollectionPhotos(collectionID: selectedCollection.id!))
+			return
 		}
 
-		guard let loadedPhotos = collectionPhotoURLs?.compactMap({ (url) -> UIImage? in
-			if let image = state.1.loaded[url] {
-				return image
+		if photoURLs == nil {
+			if case let .ready(photos) = state.sceneState.collectionPhotos {
+				let thumURLs = photos.compactMap { photo -> String? in
+					photo.urls?.thumb
+				}
+				self.photoURLs = thumURLs
+				thumURLs.forEach { (url) in
+					store.dispatch(fetchImage(withURL: url))
+				}
+				return
 			}
-			return nil
-		}) else { return }
+		}
+
+		let images = Array(state.photoState.loaded.filter { (url, image) -> Bool in
+			self.photoURLs?.contains(url) ?? false
+		}.values)
 
 		DispatchQueue.main.async { [weak self] in
-			self?.collectionProvider?.dataSource = ArrayDataSource(data: loadedPhotos)
+			self?.collectionProvider?.dataSource = ArrayDataSource(data: images)
 		}
 	}
 
 	private func subscribePhotoStateSkippingRepeats() {
 		store.subscribe(self) { subscription in
 			subscription.select { state in
+
 				let selectedCollection: UnsplashCollection? = state.navigationState.getRouteSpecificState(state.navigationState.route)
+				let collectionPhotosSceneState = state.unsplashData.collectionPhotosScene
 
 				let photoState = state.photoState
 
-				return (selectedCollection, photoState)
+				return (selectedCollection, collectionPhotosSceneState, photoState)
 			}
 		}
 	}
 
 	private func unsubscribePhotoState() {
 		store.unsubscribe(self)
-	}
-
-	private func dispatchFetchCollectionPhotoAction(_ featuredCollection: UnsplashCollection?) {
-		collectionPhotoURLs?.forEach { (url) in
-			store.dispatch(fetchImage(withURL: url))
-		}
 	}
 }

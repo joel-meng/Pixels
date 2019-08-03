@@ -23,7 +23,7 @@ extension UINavigationController {
 
 		CATransaction.begin()
 		CATransaction.setCompletionBlock(completion)
-		self.popViewController(animated: animated)
+		popViewController(animated: animated)
 		CATransaction.commit()
 	}
 }

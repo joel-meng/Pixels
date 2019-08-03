@@ -17,6 +17,7 @@ func dataReducer(action: Action, state: PixelsDataState?) -> PixelsDataState {
 	guard let action = action as? RestFetch else { return state }
 
 	state.collectionScene = collectionSceneReducer(action: action, state: state.collectionScene)
+	state.collectionPhotosScene = collectionPhotosSceneReducer(action: action, state: state.collectionPhotosScene)
 
 	return state
 }
@@ -30,10 +31,25 @@ func collectionSceneReducer(action: Action, state: CollectionsSceneState?) -> Co
 		return state
 	}
 
-	state.unsplashCollectionsState = restState
+	state.unsplashCollections = restState
 
 	return state
 }
+
+func collectionPhotosSceneReducer(action: Action, state: CollectionPhotosSceneState?) -> CollectionPhotosSceneState {
+
+	var state = state ?? CollectionPhotosSceneState()
+
+	guard let action = action as? RestFetch,
+		case let .fetchCollectionPhotos(restState) = action else {
+			return state
+	}
+
+	state.collectionPhotos = restState
+
+	return state
+}
+
 
 func photoLoadingStateReducer(action: Action, state: PhotoLoadingState?) -> PhotoLoadingState {
 

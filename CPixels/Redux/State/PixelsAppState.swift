@@ -27,11 +27,18 @@ struct PixelsAppState: StateType {
 struct PixelsDataState: StateType, Equatable {
 
 	var collectionScene: CollectionsSceneState = CollectionsSceneState()
+
+	var collectionPhotosScene: CollectionPhotosSceneState = CollectionPhotosSceneState()
 }
 
 struct CollectionsSceneState: StateType, Equatable {
 
-	var unsplashCollectionsState: RestFetchingState = RestFetchingState<[UnsplashCollection]>.notStarted
+	var unsplashCollections: RestFetchingState = RestFetchingState<[UnsplashCollection]>.notStarted
+}
+
+struct CollectionPhotosSceneState: StateType, Equatable {
+
+	var collectionPhotos: RestFetchingState<[CoverPhoto]> =  RestFetchingState.notStarted
 }
 
 // MARK: - Rest Data

@@ -9,7 +9,7 @@
 import Foundation
 import ReSwiftThunk
 
-let fetchCollectionThunk = Thunk<PixelsAppState> { (dispatch, getState) in
+let fetchCollection = Thunk<PixelsAppState> { (dispatch, getState) in
 
 	guard let state = getState() else { return }
 

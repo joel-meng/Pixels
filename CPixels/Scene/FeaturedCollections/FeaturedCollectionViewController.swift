@@ -65,7 +65,7 @@ extension FeaturedCollectionViewController: StoreSubscriber {
 	private func fetchCollectionsIfNeeded() {
 		switch tableState! {
 		case .initial:
-			store.dispatch(fetchCollectionThunk)
+			store.dispatch(fetchCollection)
 		default:
 			break
 		}
@@ -84,7 +84,7 @@ extension FeaturedCollectionViewController: StoreSubscriber {
 	}
 
 	func newState(state: CollectionsSceneState) {
-		let state = StatedTableView.State<[UnsplashCollection]>.fromRestFetchState(state.unsplashCollectionsState)
+		let state = StatedTableView.State<[UnsplashCollection]>.fromRestFetchState(state.unsplashCollections)
 		self.tableState = state
 		tableUpdater?(state)
 	}

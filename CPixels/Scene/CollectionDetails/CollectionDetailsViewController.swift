@@ -41,6 +41,10 @@ final class CollectionDetailsViewController: UIViewController {
 
 	private var collectionProvider: BasicProvider<UIImage, UIImageView>?
 
+	// MARK: - Store subscriber
+
+	private var storeSubscriber: CollectionDetailsStoreSubscriber?
+
 	// MARK: - Lifecycles
 
 	override func viewDidLoad() {
@@ -48,9 +52,18 @@ final class CollectionDetailsViewController: UIViewController {
 
 		title = featuredCollection?.title ?? "Previews"
 
-		subscribePhotoStateSkippingRepeats()
-
 		configCollectionView(collectionView)
+
+		storeSubscriber = CollectionDetailsStoreSubscriber(stateUpdater: { [weak self] (state, images) in
+			self?.screenState = state
+			if let images = images {
+				DispatchQueue.main.async {
+					self?.collectionProvider?.dataSource = ArrayDataSource(data: images)
+				}
+			}
+		})
+
+		storeSubscriber?.subscribePhotoStateSkippingRepeats()
     }
 
 	override func didMove(toParent parent: UIViewController?) {
@@ -60,7 +73,7 @@ final class CollectionDetailsViewController: UIViewController {
 	}
 
 	deinit {
-		unsubscribePhotoState()
+		storeSubscriber?.unsubscribePhotoState()
 	}
 
 	// MARK: - UI configuration
@@ -91,108 +104,7 @@ final class CollectionDetailsViewController: UIViewController {
 	}
 }
 
-extension CollectionDetailsViewController: StoreSubscriber {
-
-	func newState(
-		state: (selectedCollection: UnsplashCollection?,
-				sceneState: CollectionPhotosSceneState,
-				photoState: PhotoLoadingState)) {
-
-		if featuredCollection == nil, let selectedCollection = state.selectedCollection {
-			featuredCollection = state.selectedCollection
-			store.dispatch(fetchCollectionPhotos(collectionID: selectedCollection.id!, photosPerPage: 20))
-			return
-		}
-
-		if photoURLs == nil {
-
-			if case .loading = state.sceneState.collectionPhotos {
-				screenState = .loading
-			}
-
-			if case let .ready(photos) = state.sceneState.collectionPhotos {
-
-				guard !photos.isEmpty else {
-					screenState = .empty
-					return
-				}
-
-				self.photoURLs = imageThumURLs(ofPhotos: photos)
-
-				displayLoadedImages(loadedImages(forCollectionImageURLs: photoURLs!,
-												 from: state.photoState.loaded))
-
-				dispatchUnloadedImage(forCollectionImageURLs: photoURLs!,
-									  from: state.photoState.loaded)
-
-				screenState = .loaded
-			}
-
-			if case .error = state.sceneState.collectionPhotos {
-				screenState = .error
-			}
-
-			return
-		}
-
-		displayLoadedImages(loadedImages(forCollectionImageURLs: photoURLs!,
-										 from: state.photoState.loaded))
-
-		dispatchUnloadedImage(forCollectionImageURLs: photoURLs!,
-							  from: state.photoState.loaded)
-	}
-
-	private func imageThumURLs(ofPhotos photos: [CoverPhoto]) -> [String] {
-		return photos.compactMap { photo -> String? in
-			photo.urls?.thumb
-		}
-	}
-
-
-	private func loadedImages(forCollectionImageURLs collectionImageURLs: [String],
-							  from imageCache: [String: UIImage]) -> [UIImage] {
-		let loadedPhotoSet = Set(imageCache.keys)
-		let collectionPhotoSet = Set(collectionImageURLs)
-		let loadedCollectionPhotoSet = collectionPhotoSet.intersection(loadedPhotoSet)
-
-		return Array(imageCache.filter { (url, image) -> Bool in
-			loadedCollectionPhotoSet.contains(url)
-		}.values)
-	}
-
-	private func dispatchUnloadedImage(forCollectionImageURLs collectionImageURLs: [String],
-									   from imageCache: [String: UIImage]) {
-		let loadedPhotoSet = Set(imageCache.keys)
-		let collectionPhotoSet = Set(collectionImageURLs)
-		collectionPhotoSet.subtracting(loadedPhotoSet).forEach({ (url) in
-			store.dispatch(fetchImage(withURL: url))
-		})
-	}
-
-	private func displayLoadedImages(_ images: [UIImage]) {
-		DispatchQueue.main.async { [weak self] in
-			self?.collectionProvider?.dataSource = ArrayDataSource(data: images)
-		}
-	}
-
-	private func subscribePhotoStateSkippingRepeats() {
-		store.subscribe(self) { subscription in
-			subscription.select { state in
-
-				let selectedCollection: UnsplashCollection? = state.navigationState.getRouteSpecificState(state.navigationState.route)
-				let collectionPhotosSceneState = state.unsplashData.collectionPhotosScene
-
-				let photoState = state.photoState
-
-				return (selectedCollection, collectionPhotosSceneState, photoState)
-			}
-		}
-	}
-
-	private func unsubscribePhotoState() {
-		store.unsubscribe(self)
-	}
-}
+// MARK: - StatefulView
 
 extension CollectionDetailsViewController: StatefulView {
 

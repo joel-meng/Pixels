@@ -35,14 +35,14 @@ struct UnsplashService {
 	static func listCollectionPhotos(collectionID: Int,
 									 photosPerPage: Int,
 									 pageNumber: Int,
-									 completion: @escaping (_ response: Result<[CoverPhoto], Error>) -> Void)
+									 completion: @escaping (_ response: Result<[Photo], Error>) -> Void)
 		-> URLSessionDataTaskProtocol? {
 			
 		let listCollectionPhotosRequest = unsplashGETRequest(path: "/collections/\(collectionID)/photos")
 
 		return Rest.load(request: listCollectionPhotosRequest(["per_page": "\(photosPerPage)"]),
 						 dateDecodingStrategy: nil,
-						 expectedResultType: [CoverPhoto].self,
+						 expectedResultType: [Photo].self,
 						 completion: completion)
 	}
 }

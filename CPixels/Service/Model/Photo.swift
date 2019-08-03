@@ -12,7 +12,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 */
 
 import Foundation
-struct CoverPhoto : Codable {
+struct Photo : Codable {
 	let id : String?
 	let createdAt : String?
 	let updatedAt : String?
@@ -78,4 +78,4 @@ struct CoverPhoto : Codable {
 
 }
 
-extension CoverPhoto: Equatable {}
+extension Photo: Equatable {}

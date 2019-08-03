@@ -26,7 +26,7 @@ struct UnsplashCollection : Codable {
 	let tags : [Tag]?
 	let links : Link?
 	let user : User?
-	let coverPhoto : CoverPhoto?
+	let coverPhoto : Photo?
 	let previewPhotos : [PreviewPhoto]?
 
 	enum CodingKeys: String, CodingKey {
@@ -63,7 +63,7 @@ struct UnsplashCollection : Codable {
 		tags = try values.decodeIfPresent([Tag].self, forKey: .tags)
 		links = try values.decodeIfPresent(Link.self, forKey: .links)
 		user = try values.decodeIfPresent(User.self, forKey: .user)
-		coverPhoto = try values.decodeIfPresent(CoverPhoto.self, forKey: .coverPhoto)
+		coverPhoto = try values.decodeIfPresent(Photo.self, forKey: .coverPhoto)
 		previewPhotos = try values.decodeIfPresent([PreviewPhoto].self, forKey: .previewPhotos)
 	}
 

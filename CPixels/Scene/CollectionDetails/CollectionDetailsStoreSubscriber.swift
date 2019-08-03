@@ -90,7 +90,7 @@ final class CollectionDetailsStoreSubscriber: StoreSubscriber {
 							  from: state.photoState.loaded)
 	}
 
-	private func imageThumURLs(ofPhotos photos: [CoverPhoto]) -> [String] {
+	private func imageThumURLs(ofPhotos photos: [Photo]) -> [String] {
 		return photos.compactMap { photo -> String? in
 			photo.urls?.thumb
 		}

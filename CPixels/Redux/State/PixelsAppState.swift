@@ -36,7 +36,7 @@ struct CollectionsSceneState: StateType, Equatable {
 
 struct CollectionPhotosSceneState: StateType, Equatable {
 
-	var collectionPhotos: RestFetchingState<[CoverPhoto]> =  RestFetchingState.notStarted
+	var collectionPhotos: RestFetchingState<[Photo]> =  RestFetchingState.notStarted
 }
 
 // MARK: - Rest Data

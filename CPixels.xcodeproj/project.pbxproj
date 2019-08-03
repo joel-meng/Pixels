@@ -53,7 +53,7 @@
 		DB7B165722E898BA0058428C /* Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B164F22E898BA0058428C /* Url.swift */; };
 		DB7B165822E898BA0058428C /* PreviewPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165022E898BA0058428C /* PreviewPhoto.swift */; };
 		DB7B165A22E898BA0058428C /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165222E898BA0058428C /* Tag.swift */; };
-		DB7B165B22E898BA0058428C /* CoverPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165322E898BA0058428C /* CoverPhoto.swift */; };
+		DB7B165B22E898BA0058428C /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165322E898BA0058428C /* Photo.swift */; };
 		DB7B165C22E898BA0058428C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165422E898BA0058428C /* User.swift */; };
 		DB7B165D22E898BA0058428C /* UnsplashCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165522E898BA0058428C /* UnsplashCollection.swift */; };
 		DB7B165F22E89B020058428C /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165E22E89B020058428C /* Link.swift */; };
@@ -125,7 +125,7 @@
 		DB7B164F22E898BA0058428C /* Url.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Url.swift; sourceTree = "<group>"; };
 		DB7B165022E898BA0058428C /* PreviewPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPhoto.swift; sourceTree = "<group>"; };
 		DB7B165222E898BA0058428C /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
-		DB7B165322E898BA0058428C /* CoverPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverPhoto.swift; sourceTree = "<group>"; };
+		DB7B165322E898BA0058428C /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		DB7B165422E898BA0058428C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../../../../../../Downloads/codegen_5d3861037d6fa/User.swift; sourceTree = "<group>"; };
 		DB7B165522E898BA0058428C /* UnsplashCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsplashCollection.swift; sourceTree = "<group>"; };
 		DB7B165E22E89B020058428C /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
@@ -354,7 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				DB7B165E22E89B020058428C /* Link.swift */,
-				DB7B165322E898BA0058428C /* CoverPhoto.swift */,
+				DB7B165322E898BA0058428C /* Photo.swift */,
 				DB7B165522E898BA0058428C /* UnsplashCollection.swift */,
 				DB7B165022E898BA0058428C /* PreviewPhoto.swift */,
 				DB7B164E22E898BA0058428C /* ProfileImage.swift */,
@@ -536,7 +536,7 @@
 				DB591BDA22EB4AC60093AE24 /* PixelsStore.swift in Sources */,
 				DB2E019A22F12CE3008AFEE0 /* SingleSectionTableDelegate.swift in Sources */,
 				DB7B164122E88F7F0058428C /* DateFormatter.swift in Sources */,
-				DB7B165B22E898BA0058428C /* CoverPhoto.swift in Sources */,
+				DB7B165B22E898BA0058428C /* Photo.swift in Sources */,
 				DB2E01A222F12DA2008AFEE0 /* UITableViewCellExtension+NamingConventions.swift in Sources */,
 				DB19C9DE22F3377200616C26 /* UINavigationController+Completion.swift in Sources */,
 				DB7B165A22E898BA0058428C /* Tag.swift in Sources */,

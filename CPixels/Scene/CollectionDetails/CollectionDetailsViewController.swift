@@ -17,13 +17,27 @@ final class CollectionDetailsViewController: UIViewController {
 
 	@IBOutlet var collectionView: CollectionView!
 
+	@IBOutlet var messageLabel: UILabel!
+	
+	@IBOutlet var activityIndicator: UIActivityIndicatorView!
+	
 	// MARK: - Selections
 
-	var featuredCollection: UnsplashCollection?
+	var featuredCollection: UnsplashCollection? {
+		didSet {
+			title = featuredCollection?.title ?? "Previews"
+		}
+	}
 
 	private var photoURLs: [String]?
 
 	// MARK: - States
+
+	private var screenState: ViewState<CollectionDetailsViewController> = .uninitialized {
+		didSet {
+			screenState.update(view: self)
+		}
+	}
 
 	private var collectionProvider: BasicProvider<UIImage, UIImageView>?
 
@@ -92,19 +106,32 @@ extension CollectionDetailsViewController: StoreSubscriber {
 
 		if photoURLs == nil {
 
+			if case .loading = state.sceneState.collectionPhotos {
+				screenState = .loading
+			}
+
 			if case let .ready(photos) = state.sceneState.collectionPhotos {
 
-				let thumURLs = photos.compactMap { photo -> String? in
-					photo.urls?.thumb
+				guard !photos.isEmpty else {
+					screenState = .empty
+					return
 				}
-				self.photoURLs = thumURLs
 
-				displayLoadedImages(loadedImages(forCollectionImageURLs: thumURLs,
+				self.photoURLs = imageThumURLs(ofPhotos: photos)
+
+				displayLoadedImages(loadedImages(forCollectionImageURLs: photoURLs!,
 												 from: state.photoState.loaded))
 
-				dispatchUnloadedImage(forCollectionImageURLs: thumURLs,
+				dispatchUnloadedImage(forCollectionImageURLs: photoURLs!,
 									  from: state.photoState.loaded)
+
+				screenState = .loaded
 			}
+
+			if case .error = state.sceneState.collectionPhotos {
+				screenState = .error
+			}
+
 			return
 		}
 
@@ -114,6 +141,13 @@ extension CollectionDetailsViewController: StoreSubscriber {
 		dispatchUnloadedImage(forCollectionImageURLs: photoURLs!,
 							  from: state.photoState.loaded)
 	}
+
+	private func imageThumURLs(ofPhotos photos: [CoverPhoto]) -> [String] {
+		return photos.compactMap { photo -> String? in
+			photo.urls?.thumb
+		}
+	}
+
 
 	private func loadedImages(forCollectionImageURLs collectionImageURLs: [String],
 							  from imageCache: [String: UIImage]) -> [UIImage] {
@@ -157,5 +191,12 @@ extension CollectionDetailsViewController: StoreSubscriber {
 
 	private func unsubscribePhotoState() {
 		store.unsubscribe(self)
+	}
+}
+
+extension CollectionDetailsViewController: StatefulView {
+
+	var mainView: UIView! {
+		return collectionView
 	}
 }

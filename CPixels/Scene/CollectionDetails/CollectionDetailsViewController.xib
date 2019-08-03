@@ -12,7 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CollectionDetailsViewController" customModule="CPixels" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="g5j-Uw-RKI" id="BZF-MW-pVZ"/>
                 <outlet property="collectionView" destination="qN5-tI-wnP" id="yi8-2g-dca"/>
+                <outlet property="messageLabel" destination="l8D-6d-3pf" id="oY4-pT-oHu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,12 +26,25 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qN5-tI-wnP" customClass="MyCollectionView" customModule="CPixels" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <viewLayoutGuide key="safeArea" id="TIR-bJ-mQQ"/>
                 </view>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="g5j-Uw-RKI">
+                    <rect key="frame" x="197" y="443" width="20" height="20"/>
+                </activityIndicatorView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🎁" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8D-6d-3pf">
+                    <rect key="frame" x="191.5" y="437" width="31" height="32.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="g5j-Uw-RKI" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="3DX-EE-5J3"/>
+                <constraint firstItem="l8D-6d-3pf" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="3OB-UO-wjG"/>
+                <constraint firstItem="l8D-6d-3pf" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="8tr-HK-XFA"/>
                 <constraint firstAttribute="bottom" secondItem="qN5-tI-wnP" secondAttribute="bottom" id="9Qu-F3-CYB"/>
+                <constraint firstItem="l8D-6d-3pf" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="OL2-AY-Skh"/>
+                <constraint firstItem="g5j-Uw-RKI" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="TzB-4D-Sp4"/>
                 <constraint firstItem="qN5-tI-wnP" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="gZr-i7-fnk"/>
                 <constraint firstItem="qN5-tI-wnP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="nCn-RT-4SP"/>
                 <constraint firstItem="qN5-tI-wnP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="oIx-XP-Faa"/>

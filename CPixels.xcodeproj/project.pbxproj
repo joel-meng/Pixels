@@ -59,6 +59,7 @@
 		DB7B165F22E89B020058428C /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165E22E89B020058428C /* Link.swift */; };
 		DB7B166122E89E5A0058428C /* RestRequestAuthorizationDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B166022E89E5A0058428C /* RestRequestAuthorizationDecorator.swift */; };
 		DB7F2D0822EF103C001BBA11 /* MyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F2D0722EF103C001BBA11 /* MyCollectionView.swift */; };
+		DBEE443522F59FCB00E8BD4C /* StatefulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEE443422F59FCB00E8BD4C /* StatefulView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +129,7 @@
 		DB7B165E22E89B020058428C /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		DB7B166022E89E5A0058428C /* RestRequestAuthorizationDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestRequestAuthorizationDecorator.swift; sourceTree = "<group>"; };
 		DB7F2D0722EF103C001BBA11 /* MyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionView.swift; sourceTree = "<group>"; };
+		DBEE443422F59FCB00E8BD4C /* StatefulView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 				DB2E01A522F12EED008AFEE0 /* UIView+AutoLayout.swift */,
 				DB2E01A722F12F27008AFEE0 /* UIView+Nib.swift */,
 				DB19C9DD22F3377200616C26 /* UINavigationController+Completion.swift */,
+				DBEE443422F59FCB00E8BD4C /* StatefulView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -535,6 +538,7 @@
 				DB591BEE22EDE3700093AE24 /* CollectionDetailsViewController.swift in Sources */,
 				DB2E01A622F12EED008AFEE0 /* UIView+AutoLayout.swift in Sources */,
 				DB7B165D22E898BA0058428C /* UnsplashCollection.swift in Sources */,
+				DBEE443522F59FCB00E8BD4C /* StatefulView.swift in Sources */,
 				DB7B164022E88F7F0058428C /* HTTPURLResponse+Status.swift in Sources */,
 				DB2E01AC22F19253008AFEE0 /* FetchCollectionsThunk.swift in Sources */,
 				DB591BCA22EB37930093AE24 /* Reader.swift in Sources */,

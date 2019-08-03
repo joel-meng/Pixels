@@ -18,12 +18,18 @@ final class CollectionDetailsStoreSubscriber: StoreSubscriber {
 
 	private var collectionPhotoURLs: [String]? = nil
 
+	// MARK: - Updater
+
 	private var stateUpdater: ((ViewState<CollectionDetailsViewController>, [UIImage]?) -> Void)
+
+	private var titleUpdater: ((String?) -> Void)
 
 	// MARK: - Lifecycle
 
-	init(stateUpdater: @escaping ((ViewState<CollectionDetailsViewController>, [UIImage]?) -> Void)) {
+	init(stateUpdater: @escaping ((ViewState<CollectionDetailsViewController>, [UIImage]?) -> Void),
+		 titleUpdater: @escaping (String?) -> Void) {
 		self.stateUpdater = stateUpdater
+		self.titleUpdater = titleUpdater
 	}
 
 	func newState(
@@ -34,6 +40,7 @@ final class CollectionDetailsStoreSubscriber: StoreSubscriber {
 		// Find user selected collection and fire `GetCollectionPhoto` API call
 		if collection == nil, let selectedCollection = state.selectedCollection {
 			collection = state.selectedCollection
+			updaterUI(weaker: titleUpdater) { $0(state.selectedCollection?.title) }
 			store.dispatch(fetchCollectionPhotos(collectionID: selectedCollection.id!, photosPerPage: 30))
 			return
 		}
@@ -43,13 +50,13 @@ final class CollectionDetailsStoreSubscriber: StoreSubscriber {
 
 			// If `GetCollectionPhoto` API call is `loading`, tell screen to `loading` state
 			if case .loading = state.sceneState.collectionPhotos {
-				stateUpdater(.loading, nil)
+				updaterUI(weaker: stateUpdater) { $0(.loading, nil) }
 				return
 			}
 
 			// If `GetCollectionPhoto` API call is `error`, tell screen to `error` state
 			if case .error = state.sceneState.collectionPhotos {
-				stateUpdater(.error, nil)
+				updaterUI(weaker: stateUpdater) { $0(.error, nil) }
 				return
 			}
 
@@ -59,7 +66,7 @@ final class CollectionDetailsStoreSubscriber: StoreSubscriber {
 				// If `GetCollectionPhoto` is `empty`(no photos)
 				guard !photos.isEmpty else {
 					// Tell screen to display `empty`
-					stateUpdater(.empty, nil)
+					updaterUI(weaker: stateUpdater) { $0(.empty, nil) }
 					return
 				}
 
@@ -76,7 +83,7 @@ final class CollectionDetailsStoreSubscriber: StoreSubscriber {
 		// If thumb photos already cached, tell screen to load and display
 		let loadedImage = imagesCached(forCollectionImageURLs: collectionPhotoURLs,
 									   from: state.photoState.loaded)
-		stateUpdater(.loaded, loadedImage)
+		updaterUI(weaker: stateUpdater) { $0(.loaded, loadedImage) }
 
 		// Download thumb photos that not cached.
 		dispatchImageUncached(forCollectionImageURLs: collectionPhotoURLs,
@@ -112,6 +119,7 @@ final class CollectionDetailsStoreSubscriber: StoreSubscriber {
 	// MARK: - Subscription && Unsubscription
 
 	func subscribePhotoStateSkippingRepeats() {
+
 		store.subscribe(self) { subscription in
 			subscription.select { state in
 

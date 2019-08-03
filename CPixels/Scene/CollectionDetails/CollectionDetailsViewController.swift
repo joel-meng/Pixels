@@ -20,14 +20,6 @@ final class CollectionDetailsViewController: UIViewController {
 	@IBOutlet var messageLabel: UILabel!
 	
 	@IBOutlet var activityIndicator: UIActivityIndicatorView!
-	
-	// MARK: - Selections
-
-	var featuredCollection: UnsplashCollection? {
-		didSet {
-			title = featuredCollection?.title ?? "Previews"
-		}
-	}
 
 	// MARK: - States
 
@@ -50,19 +42,19 @@ final class CollectionDetailsViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 
-		title = featuredCollection?.title ?? "Previews"
-
 		configCollectionView(collectionView)
 
-		storeSubscriber = CollectionDetailsStoreSubscriber(stateUpdater: { [weak self] (state, images) in
-			self?.screenState = state
-
-			if let images = images {
-				DispatchQueue.main.async {
+		storeSubscriber = CollectionDetailsStoreSubscriber(
+			stateUpdater: { [weak self] (state, images) in
+				self?.screenState = state
+				if let images = images {
 					self?.collectionProvider?.dataSource = ArrayDataSource(data: images)
 				}
+			},
+			titleUpdater: { [weak self] title in
+				self?.title = title ?? "Previews"
 			}
-		})
+		)
 
 		storeSubscriber?.subscribePhotoStateSkippingRepeats()
     }

@@ -61,6 +61,7 @@
 		DB7F2D0822EF103C001BBA11 /* MyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F2D0722EF103C001BBA11 /* MyCollectionView.swift */; };
 		DBEE443522F59FCB00E8BD4C /* StatefulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEE443422F59FCB00E8BD4C /* StatefulView.swift */; };
 		DBEE443722F5B12400E8BD4C /* CollectionDetailsStoreSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEE443622F5B12400E8BD4C /* CollectionDetailsStoreSubscriber.swift */; };
+		DBEE443922F5E2D900E8BD4C /* Fn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBEE443822F5E2D900E8BD4C /* Fn.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,7 @@
 		DB7F2D0722EF103C001BBA11 /* MyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionView.swift; sourceTree = "<group>"; };
 		DBEE443422F59FCB00E8BD4C /* StatefulView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulView.swift; sourceTree = "<group>"; };
 		DBEE443622F5B12400E8BD4C /* CollectionDetailsStoreSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailsStoreSubscriber.swift; sourceTree = "<group>"; };
+		DBEE443822F5E2D900E8BD4C /* Fn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fn.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 				DB2E01A722F12F27008AFEE0 /* UIView+Nib.swift */,
 				DB19C9DD22F3377200616C26 /* UINavigationController+Completion.swift */,
 				DBEE443422F59FCB00E8BD4C /* StatefulView.swift */,
+				DBEE443822F5E2D900E8BD4C /* Fn.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				DB7B165622E898BA0058428C /* ProfileImage.swift in Sources */,
 				DB591BD722EB4A9F0093AE24 /* MainReducer.swift in Sources */,
 				DB591BDC22EB4AE60093AE24 /* DataReducer.swift in Sources */,
+				DBEE443922F5E2D900E8BD4C /* Fn.swift in Sources */,
 				DB591BD022EB40980093AE24 /* PixelsAppState.swift in Sources */,
 				DB2E01A822F12F27008AFEE0 /* UIView+Nib.swift in Sources */,
 				DB2E01A022F12DA2008AFEE0 /* NibExtension+NamingConvention.swift in Sources */,

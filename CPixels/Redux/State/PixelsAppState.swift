@@ -68,6 +68,8 @@ enum DataReadyState {
 struct PhotoLoadingState: StateType, Equatable {
 
 	var loaded: [String: UIImage] = [:]
+
+	var loading: [String] = []
 	
 //	var counter: [String: Int] = [:]
 }

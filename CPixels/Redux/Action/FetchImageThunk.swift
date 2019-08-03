@@ -16,7 +16,12 @@ func fetchImage(withURL imageUrl: String) -> Thunk<PixelsAppState> {
 		guard let state = getState() else { return }
 
 		if nil != state.photoState.loaded[imageUrl] {
-			// skip loaded image 
+			// skip loaded image
+			return
+		}
+
+		if state.photoState.loading.contains(imageUrl) {
+			// skip loading image
 			return
 		}
 

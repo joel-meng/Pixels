@@ -61,10 +61,15 @@ func photoLoadingStateReducer(action: Action, state: PhotoLoadingState?) -> Phot
 
 	switch imageFetchingAction.loadingState {
 	case .success(let image):
+		state.loading.removeAll { (url) -> Bool in
+			imageFetchingAction.imageURL == url
+		}
 		state.loaded[imageFetchingAction.imageURL] = image as? UIImage
 //		state.counter[imageFetchingAction.imageURL] = (state.counter[imageFetchingAction.imageURL] ?? 0) + 1
 
-	case .error, .started, .notStarted:
+	case .started:
+		state.loading.append(imageFetchingAction.imageURL)
+	case .error, .notStarted:
 		break
 	}
 

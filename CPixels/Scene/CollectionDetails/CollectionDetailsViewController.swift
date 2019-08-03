@@ -82,8 +82,7 @@ extension CollectionDetailsViewController: StoreSubscriber {
 	func newState(
 		state: (selectedCollection: UnsplashCollection?,
 				sceneState: CollectionPhotosSceneState,
-				photoState: PhotoLoadingState)
-		) {
+				photoState: PhotoLoadingState)) {
 
 		if featuredCollection == nil, let selectedCollection = state.selectedCollection {
 			featuredCollection = state.selectedCollection
@@ -92,22 +91,51 @@ extension CollectionDetailsViewController: StoreSubscriber {
 		}
 
 		if photoURLs == nil {
+
 			if case let .ready(photos) = state.sceneState.collectionPhotos {
+
 				let thumURLs = photos.compactMap { photo -> String? in
 					photo.urls?.thumb
 				}
 				self.photoURLs = thumURLs
-				thumURLs.forEach { (url) in
-					store.dispatch(fetchImage(withURL: url))
-				}
-				return
+
+				displayLoadedImages(loadedImages(forCollectionImageURLs: thumURLs,
+												 from: state.photoState.loaded))
+
+				dispatchUnloadedImage(forCollectionImageURLs: thumURLs,
+									  from: state.photoState.loaded)
 			}
+			return
 		}
 
-		let images = Array(state.photoState.loaded.filter { (url, image) -> Bool in
-			self.photoURLs?.contains(url) ?? false
-		}.values)
+		displayLoadedImages(loadedImages(forCollectionImageURLs: photoURLs!,
+										 from: state.photoState.loaded))
 
+		dispatchUnloadedImage(forCollectionImageURLs: photoURLs!,
+							  from: state.photoState.loaded)
+	}
+
+	private func loadedImages(forCollectionImageURLs collectionImageURLs: [String],
+							  from imageCache: [String: UIImage]) -> [UIImage] {
+		let loadedPhotoSet = Set(imageCache.keys)
+		let collectionPhotoSet = Set(collectionImageURLs)
+		let loadedCollectionPhotoSet = collectionPhotoSet.intersection(loadedPhotoSet)
+
+		return Array(imageCache.filter { (url, image) -> Bool in
+			loadedCollectionPhotoSet.contains(url)
+		}.values)
+	}
+
+	private func dispatchUnloadedImage(forCollectionImageURLs collectionImageURLs: [String],
+									   from imageCache: [String: UIImage]) {
+		let loadedPhotoSet = Set(imageCache.keys)
+		let collectionPhotoSet = Set(collectionImageURLs)
+		collectionPhotoSet.subtracting(loadedPhotoSet).forEach({ (url) in
+			store.dispatch(fetchImage(withURL: url))
+		})
+	}
+
+	private func displayLoadedImages(_ images: [UIImage]) {
 		DispatchQueue.main.async { [weak self] in
 			self?.collectionProvider?.dataSource = ArrayDataSource(data: images)
 		}

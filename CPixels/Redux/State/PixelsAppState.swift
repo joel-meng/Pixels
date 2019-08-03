@@ -19,8 +19,6 @@ struct PixelsAppState: StateType {
 
 	var photoState: PhotoLoadingState = PhotoLoadingState()
 
-	var interactionState: UserInteractionState = UserInteractionState()
-
 	var navigationState: NavigationState = NavigationState()
 }
 
@@ -73,11 +71,3 @@ struct PhotoLoadingState: StateType, Equatable {
 	
 //	var counter: [String: Int] = [:]
 }
-
-// MARK: - User interaction state
-
-struct UserInteractionState: StateType, Equatable {
-
-	var selectedFeatureCollection: UserSelectionAction?
-}
-

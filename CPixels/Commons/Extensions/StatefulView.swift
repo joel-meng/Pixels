@@ -25,31 +25,46 @@ enum ViewState<SV: StatefulView> {
 	case empty
 
 	func update(view: StatefulView) {
+
+		var completion:  () -> Void
+
 		switch self {
 
 		case .loading, .uninitialized:
-			view.activityIndicator.startAnimating()
-			view.activityIndicator.isHidden = false
-			view.messageLabel.isHidden = true
-			view.mainView.isHidden = true
+			completion = {
+				view.activityIndicator.startAnimating()
+				view.activityIndicator.isHidden = false
+				view.messageLabel.isHidden = true
+				view.mainView.isHidden = true
+			}
 
 		case .loaded:
-			view.activityIndicator.stopAnimating()
-			view.activityIndicator.isHidden = true
-			view.messageLabel.isHidden = true
-			view.mainView.isHidden = false
+			completion = {
+				view.activityIndicator.stopAnimating()
+				view.activityIndicator.isHidden = true
+				view.messageLabel.isHidden = true
+				view.mainView.isHidden = false
+			}
 
 		case .empty:
-			view.activityIndicator.stopAnimating()
-			view.activityIndicator.isHidden = true
-			view.messageLabel.isHidden = false
-			view.mainView.isHidden = true
+			completion = {
+				view.activityIndicator.stopAnimating()
+				view.activityIndicator.isHidden = true
+				view.messageLabel.isHidden = false
+				view.messageLabel.text = "No data 🎁"
+				view.mainView.isHidden = true
+			}
 
 		case .error:
-			view.activityIndicator.startAnimating()
-			view.activityIndicator.isHidden = true
-			view.messageLabel.isHidden = false
-			view.mainView.isHidden = true
+			completion = {
+				view.activityIndicator.startAnimating()
+				view.activityIndicator.isHidden = true
+				view.messageLabel.isHidden = false
+				view.messageLabel.text = "Oops, something goes wrong 🤪"
+				view.mainView.isHidden = true
+			}
 		}
+
+		DispatchQueue.main.async(execute: completion)
 	}
 }

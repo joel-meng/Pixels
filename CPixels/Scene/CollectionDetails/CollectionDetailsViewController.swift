@@ -29,8 +29,6 @@ final class CollectionDetailsViewController: UIViewController {
 		}
 	}
 
-	private var photoURLs: [String]?
-
 	// MARK: - States
 
 	private var screenState: ViewState<CollectionDetailsViewController> = .uninitialized {
@@ -38,6 +36,8 @@ final class CollectionDetailsViewController: UIViewController {
 			screenState.update(view: self)
 		}
 	}
+
+	// MARK: - CollectionView Provider
 
 	private var collectionProvider: BasicProvider<UIImage, UIImageView>?
 
@@ -56,6 +56,7 @@ final class CollectionDetailsViewController: UIViewController {
 
 		storeSubscriber = CollectionDetailsStoreSubscriber(stateUpdater: { [weak self] (state, images) in
 			self?.screenState = state
+
 			if let images = images {
 				DispatchQueue.main.async {
 					self?.collectionProvider?.dataSource = ArrayDataSource(data: images)

@@ -15,7 +15,6 @@ func reducer(action: Action, state: PixelsAppState?) -> PixelsAppState {
 	return PixelsAppState(
 		unsplashData: dataReducer(action: action, state: state?.unsplashData),
 		photoState: photoLoadingStateReducer(action: action, state: state?.photoState),
-		interactionState: userInteractionStateReducer(action: action, state: state?.interactionState),
 		navigationState: NavigationReducer.handleAction(action, state: state?.navigationState)
 	)
 }

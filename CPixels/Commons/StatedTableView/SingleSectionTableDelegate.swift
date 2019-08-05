@@ -26,12 +26,15 @@ class SingleSectionTableDelegate<T>: NSObject, UITableViewDataSource, UITableVie
 	}
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return items.count
+		return 100
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let dequeuedCell = tableView.dequeueDefaultReusableCell(forIndexPath: indexPath) as ReflexTableViewCell<T>
-		return cell(dequeuedCell, items[indexPath.row])
+		if indexPath.row < items.count {
+			return cell(dequeuedCell, items[indexPath.row])
+		}
+		return UITableViewCell(style: .default, reuseIdentifier: "no")
 	}
 
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

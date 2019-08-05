@@ -20,7 +20,7 @@ class FeaturedCollectionViewController: UIViewController {
 
 	private var tableUpdater: ((StatedTableView.State<[UnsplashCollection]>) -> Void)?
 
-	private var tableState: StatedTableView.State<[UnsplashCollection]>?
+	private var tableState: StatedTableView.State<[UnsplashCollection]>? = .initial
 
 	// MARK: - Lifecycle methods
 
@@ -65,7 +65,7 @@ extension FeaturedCollectionViewController: StoreSubscriber {
 	private func fetchCollectionsIfNeeded() {
 		switch tableState! {
 		case .initial:
-			store.dispatch(fetchCollection)
+			store.dispatch(fetchCollection(page: 1))
 		default:
 			break
 		}

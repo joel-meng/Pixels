@@ -31,7 +31,7 @@ struct PixelsDataState: StateType, Equatable {
 
 struct CollectionsSceneState: StateType, Equatable {
 
-	var unsplashCollections: RestFetchingState = RestFetchingState<[UnsplashCollection]>.notStarted
+	var unsplashCollections: [Int: RestFetchingState<[UnsplashCollection]>] = [:]
 }
 
 struct CollectionPhotosSceneState: StateType, Equatable {

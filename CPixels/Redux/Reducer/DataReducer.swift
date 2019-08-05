@@ -31,7 +31,8 @@ func collectionSceneReducer(action: Action, state: CollectionsSceneState?) -> Co
 		return state
 	}
 
-	state.unsplashCollections = restState
+	let (loadingState, page) = restState
+	state.unsplashCollections[page] = loadingState
 
 	return state
 }

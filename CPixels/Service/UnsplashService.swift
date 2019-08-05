@@ -20,13 +20,16 @@ struct UnsplashService {
 		}
 	}
 
-	static func listCollections(completion: @escaping (_ response: Result<[UnsplashCollection], Error>) -> Void)
+	static func listCollections(page: Int,
+								collectionsPerPage: Int = 10,
+								completion: @escaping (_ response: Result<[UnsplashCollection], Error>) -> Void)
 		-> URLSessionDataTaskProtocol? {
 
 		let listCollectionsRequest = unsplashGETRequest(path: "/collections")
 		let dateDecodingFormatter = JSONDecoder.DateDecodingStrategy.formatted(DateFormatter.rfc3339DateFormatter)
 
-		return Rest.load(request: listCollectionsRequest([:]),
+			let params = ["page": "\(page)", "collectionsPerPage": "\(collectionsPerPage)"]
+		return Rest.load(request: listCollectionsRequest(params),
 						 dateDecodingStrategy: dateDecodingFormatter,
 						 expectedResultType: [UnsplashCollection].self,
 						 completion: completion)

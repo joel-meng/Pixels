@@ -12,9 +12,12 @@ final class StatedTableView: UIView {
 
 	// MARK: - IBOutlet
 
+	lazy var preFetchingDS: FeaturedCollectionDataSourcePrefetching = FeaturedCollectionDataSourcePrefetching()
+
 	@IBOutlet var tableView: UITableView! {
 		didSet {
 			tableView.separatorStyle = .none
+			tableView.prefetchDataSource = preFetchingDS
 		}
 	}
 
@@ -96,20 +99,30 @@ final class StatedTableView: UIView {
 		case data(T)
 		case error(String)
 
-		static func fromRestFetchState<D: Collection>(_ state: RestFetchingState<D>) -> State {
+		static func fromRestFetchState<D: Collection>(_ state: [Int: RestFetchingState<D>]) -> State {
 
-			switch state {
-			case .loading:
-				return StatedTableView.State<T>.loading
-			case .ready(let data):
-				return StatedTableView.State<T>.data(data as! T)
-			case .error(let error):
-				return StatedTableView.State<T>.error(error)
-			case .outdated:
-				return StatedTableView.State<T>.empty
-			case .notStarted:
-				return StatedTableView.State<T>.initial
+			if state.isEmpty {
+				return .initial
 			}
+
+			if state.count == 1, case .loading? = state.first?.value {
+				return StatedTableView.State<T>.loading
+			}
+
+			let readyCollections = state.values.compactMap { (collectionState) -> D? in
+				if case .ready(let collection) = collectionState {
+					return collection
+				}
+				return nil
+			}.flatMap { $0 }
+
+			if readyCollections.isEmpty {
+				return .empty
+			}
+
+			print("ready collections: \((readyCollections as! [UnsplashCollection]).first?.title)")
+			return .data(readyCollections as! T)
+
 		}
 	}
 }
@@ -152,6 +165,20 @@ func customCellDataUpdater
 		case .data(let items):
 			tableDataSourceAndDelegate.items = items
 			statedTableView.showCollection(items)
+		}
+	}
+}
+
+final class FeaturedCollectionDataSourcePrefetching: NSObject, UITableViewDataSourcePrefetching {
+
+	func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+		let pages = indexPaths.reduce(into: Set<Int>()) { (result, indexPath) in
+//			print("prefetch \(indexPath.row)")
+			result.insert(indexPath.row / 10 + 1)
+		}
+		pages.forEach { (page) in
+//			print("dispatching loading request for page \(page)")
+			store.dispatch(fetchCollection(collectionPerPage: 10, page: page))
 		}
 	}
 }

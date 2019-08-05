@@ -20,6 +20,7 @@
 		DB2E01A822F12F27008AFEE0 /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E01A722F12F27008AFEE0 /* UIView+Nib.swift */; };
 		DB2E01AA22F17B82008AFEE0 /* FetchImageThunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E01A922F17B82008AFEE0 /* FetchImageThunk.swift */; };
 		DB2E01AC22F19253008AFEE0 /* FetchCollectionsThunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E01AB22F19253008AFEE0 /* FetchCollectionsThunk.swift */; };
+		DB42789B22F7F973003707E7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB42789A22F7F973003707E7 /* User.swift */; };
 		DB591BCA22EB37930093AE24 /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BC922EB37930093AE24 /* Reader.swift */; };
 		DB591BCC22EB3FAB0093AE24 /* UnsplashRequestCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BCB22EB3FAB0093AE24 /* UnsplashRequestCreator.swift */; };
 		DB591BD022EB40980093AE24 /* PixelsAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB591BCF22EB40980093AE24 /* PixelsAppState.swift */; };
@@ -54,7 +55,6 @@
 		DB7B165822E898BA0058428C /* PreviewPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165022E898BA0058428C /* PreviewPhoto.swift */; };
 		DB7B165A22E898BA0058428C /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165222E898BA0058428C /* Tag.swift */; };
 		DB7B165B22E898BA0058428C /* CoverPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165322E898BA0058428C /* CoverPhoto.swift */; };
-		DB7B165C22E898BA0058428C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165422E898BA0058428C /* User.swift */; };
 		DB7B165D22E898BA0058428C /* UnsplashCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165522E898BA0058428C /* UnsplashCollection.swift */; };
 		DB7B165F22E89B020058428C /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B165E22E89B020058428C /* Link.swift */; };
 		DB7B166122E89E5A0058428C /* RestRequestAuthorizationDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B166022E89E5A0058428C /* RestRequestAuthorizationDecorator.swift */; };
@@ -88,6 +88,7 @@
 		DB2E01A722F12F27008AFEE0 /* UIView+Nib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Nib.swift"; sourceTree = "<group>"; };
 		DB2E01A922F17B82008AFEE0 /* FetchImageThunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageThunk.swift; sourceTree = "<group>"; };
 		DB2E01AB22F19253008AFEE0 /* FetchCollectionsThunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCollectionsThunk.swift; sourceTree = "<group>"; };
+		DB42789A22F7F973003707E7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DB591BC922EB37930093AE24 /* Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader.swift; sourceTree = "<group>"; };
 		DB591BCB22EB3FAB0093AE24 /* UnsplashRequestCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashRequestCreator.swift; sourceTree = "<group>"; };
 		DB591BCF22EB40980093AE24 /* PixelsAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelsAppState.swift; sourceTree = "<group>"; };
@@ -126,7 +127,6 @@
 		DB7B165022E898BA0058428C /* PreviewPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPhoto.swift; sourceTree = "<group>"; };
 		DB7B165222E898BA0058428C /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		DB7B165322E898BA0058428C /* CoverPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverPhoto.swift; sourceTree = "<group>"; };
-		DB7B165422E898BA0058428C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../../../../../../Downloads/codegen_5d3861037d6fa/User.swift; sourceTree = "<group>"; };
 		DB7B165522E898BA0058428C /* UnsplashCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsplashCollection.swift; sourceTree = "<group>"; };
 		DB7B165E22E89B020058428C /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		DB7B166022E89E5A0058428C /* RestRequestAuthorizationDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestRequestAuthorizationDecorator.swift; sourceTree = "<group>"; };
@@ -353,6 +353,7 @@
 		DB7B163422E88F7F0058428C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DB42789A22F7F973003707E7 /* User.swift */,
 				DB7B165E22E89B020058428C /* Link.swift */,
 				DB7B165322E898BA0058428C /* CoverPhoto.swift */,
 				DB7B165522E898BA0058428C /* UnsplashCollection.swift */,
@@ -360,7 +361,6 @@
 				DB7B164E22E898BA0058428C /* ProfileImage.swift */,
 				DB7B165222E898BA0058428C /* Tag.swift */,
 				DB7B164F22E898BA0058428C /* Url.swift */,
-				DB7B165422E898BA0058428C /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -548,6 +548,7 @@
 				DB7B164022E88F7F0058428C /* HTTPURLResponse+Status.swift in Sources */,
 				DB2E01AC22F19253008AFEE0 /* FetchCollectionsThunk.swift in Sources */,
 				DB591BCA22EB37930093AE24 /* Reader.swift in Sources */,
+				DB42789B22F7F973003707E7 /* User.swift in Sources */,
 				DB7B165622E898BA0058428C /* ProfileImage.swift in Sources */,
 				DB591BD722EB4A9F0093AE24 /* MainReducer.swift in Sources */,
 				DB591BDC22EB4AE60093AE24 /* DataReducer.swift in Sources */,
@@ -573,7 +574,6 @@
 				DB7B164222E88F7F0058428C /* UnsplashService.swift in Sources */,
 				DB7B15F922E881A90058428C /* AppDelegate.swift in Sources */,
 				DB591BE522EDCAAF0093AE24 /* FeaturedCollectionViewController.swift in Sources */,
-				DB7B165C22E898BA0058428C /* User.swift in Sources */,
 				DB7F2D0822EF103C001BBA11 /* MyCollectionView.swift in Sources */,
 				DB591BE922EDCB310093AE24 /* UnsplashCollectionTableViewCell.swift in Sources */,
 			);
